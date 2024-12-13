@@ -1,0 +1,6 @@
+_target_: atom.signalProc.constants.Constants
+######### Thermodynamic properties
+# gamma = Cp/Ct ratio of specific heats of air
+gamma: 1.4
+# Gas constant for air
+Ra: 287.058 

@@ -1,0 +1,15 @@
+_target_: atom.signalProc.auxdata.AuxData
+samplingFrequency: 20.0 # Hz
+recordTimeDuration: 0.5 # s
+recordTimeDelta: 0.05 # s
+recordLength: 1200 # samples
+variables:
+  - ux
+  - uy
+  - uz
+  - c
+  - T 
+  - H
+sonicAnemometerOrientation: 0.0 #22.0 # degrees
+windowType: "hann"
+threshold: 0.5

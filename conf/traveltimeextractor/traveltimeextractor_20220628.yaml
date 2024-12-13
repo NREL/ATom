@@ -1,0 +1,11 @@
+upsampleFactor: 10
+backgroundFlow: 'homogeneous' # loglaw, powerlaw, FLORIS
+backgroundTemp: 'homogeneous' # other models?
+filterType: 'butter'
+filterOrder: 4
+filterScale: 0.5
+peakHeight: 0.18
+peakDistance: 150
+filterStdThreshold: 1.0
+filterIterations: 3
+delayOffset: [2.85, 1, 0.28, -3.7e-5] # amplitude, freq, phase, offset

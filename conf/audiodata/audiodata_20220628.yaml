@@ -1,0 +1,28 @@
+_target_: atom.signalProc.audiodata.AudioData
+samplingFrequency: 20000 # Hz
+deltaT: 0.05 # ms
+######### record info
+# each record is a single cylce of signal emission and reception. Each speaker emits a chirp every half-second, each mic receives 8 signals in the same period.
+# time of a single record, ms
+recordTimeDuration: 0.5 # s
+recordTimeDelta: 0.00005 # s
+recordLength: 10000 # samples
+nFrames: 120 # number of frames in data set
+######### Acoustic signal parameters/constants
+# Each chirp persists for a fixed time (T_signal)
+chirpTimeDuration: 0.0058 # s
+chirpRecordLength: 116 # samples
+chirpCentralFrequency: 1200 # Hz
+chirpBandwidth: 700 # Hz, signal bandwidth
+speakerSignalEmissionTime: # ms
+    - 0.1240
+    - 0.1040
+    - 0.2040
+    - 0.0
+    - 0.1600
+    - 0.2000
+    - 0.0400
+    - 0.1440
+nMics: ${atarray.nMics}
+nSpeakers: ${atarray.nSpeakers}
+windowHalfWidth: 0.01 # seconds

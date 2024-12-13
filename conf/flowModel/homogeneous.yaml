@@ -1,0 +1,4 @@
+_target_: atom.backgroundFlow.flowModel.homogeneous
+meanU: None # Extract from AuxData
+meanV: None # Extract from AuxData
+meanT: None # Extract from AuxData
