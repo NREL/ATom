@@ -7,9 +7,11 @@ The travel time, $t_i$, along any signal path, $L_i$, can be expressed.
 $$
     t_i = \int_{L_i} \frac{1}{u_i (\mathbf{r}_i)} dl
 $$
+
 where $i=1,...,I$ represents the index of the path and $I$ is the total number of travel paths considered ($I=64$ for the current application).
 
 The local speed of sound is typically taken as the Laplace adiabatic sound speed, $c_L$, which is related to the acoustic virtual temperature, $T_{av}$,
+
 $$
     c_L = \sqrt{\gamma R_a T_\text{av}}
 $$
