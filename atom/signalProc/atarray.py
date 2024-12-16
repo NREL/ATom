@@ -2,6 +2,7 @@ from dataclasses import dataclass, asdict
 import numpy as np
 import xarray as xr
 from atom import utils
+import logging
 
 logger = logging.getLogger(__name__)
 

@@ -1,0 +1,26 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+  
+parts: 
+- caption: Getting Started
+  chapters:
+  - file: gettingStarted
+- caption: Theory Reference
+  chapters: 
+  - file: contents/theory
+- caption: Walkthrough
+  chapters:
+  - file: contents/01_SignalProcessingModule_20240410/01_SignalProcessingModule_20240410
+  - file: contents/02_travelTimeExtractor_20240411/02_travelTimeExtractor_20240411
+  - file: contents/02a_travelTimeDebug_20240104/02a_travelTimeDebug_20240104
+  - file: contents/03_bulkFieldEstimation_20240412/03_bulkFieldEstimation_20240412
+  - file: contents/03a_sonic_v_array_20230110/03a_sonic_v_array_20230110
+  - file: contents/04_modelGrid_and_covarianceMatrix_20240416/04_modelGrid_and_covarianceMatrix_20240416
+  - file: contents/05_TDSI_20240416/05_TDSI_20240416
+  - file: contents/06_LES_virtualArray_20240419/06_LES_virtualArray_20240419
+- caption: API Reference
+  chapters:
+  - file: autoapi/atom/index

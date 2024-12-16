@@ -1,0 +1,1076 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Covariance Matrices &#8212; Acoustic Travel Time Tomography</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'contents/04_modelGrid_and_covarianceMatrix_20240416/04_modelGrid_and_covarianceMatrix_20240416';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Time-Dependent Stochastic Inversion" href="../05_TDSI_20240416/05_TDSI_20240416.html" />
+    <link rel="prev" title="Bulk flow validation against sonic anemometer" href="../03a_sonic_v_array_20230110/03a_sonic_v_array_20230110.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Acoustic Travel Time Tomography</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Introduction to Acoustic Travel Time Tomography
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../gettingStarted.html">Installation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Theory Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../theory.html">Theory</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Walkthrough</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01_SignalProcessingModule_20240410/01_SignalProcessingModule_20240410.html">The <code class="docutils literal notranslate"><span class="pre">atom</span></code> Signal Processing Module</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../02_travelTimeExtractor_20240411/02_travelTimeExtractor_20240411.html">Travel Time Extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02a_travelTimeDebug_20240104/02a_travelTimeDebug_20240104.html">Travel time measurement review, validation, and bias estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_bulkFieldEstimation_20240412/03_bulkFieldEstimation_20240412.html">The <code class="docutils literal notranslate"><span class="pre">atom.backgroundFlow</span></code> module</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../03a_sonic_v_array_20230110/03a_sonic_v_array_20230110.html">Bulk flow validation against sonic anemometer</a></li>
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Covariance Matrices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_TDSI_20240416/05_TDSI_20240416.html">Time-Dependent Stochastic Inversion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_LES_virtualArray_20240419/06_LES_virtualArray_20240419.html">Virtual Acoustic Tomography Array</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../autoapi/atom/index.html">atom</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../autoapi/atom/backgroundFlow/index.html">atom.backgroundFlow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/atom/backgroundFlow/flowModel/index.html">atom.backgroundFlow.flowModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/atom/backgroundFlow/linearsystem/index.html">atom.backgroundFlow.linearsystem</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../autoapi/atom/fluctuatingField/index.html">atom.fluctuatingField</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/atom/fluctuatingField/covarinceMatix/index.html">atom.fluctuatingField.covarinceMatix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/atom/fluctuatingField/modelGrid/index.html">atom.fluctuatingField.modelGrid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/atom/fluctuatingField/pathSetup/index.html">atom.fluctuatingField.pathSetup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/atom/fluctuatingField/timeDependentStochasticInversion/index.html">atom.fluctuatingField.timeDependentStochasticInversion</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../autoapi/atom/signalProc/index.html">atom.signalProc</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/atom/signalProc/atarray/index.html">atom.signalProc.atarray</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/atom/signalProc/audiodata/index.html">atom.signalProc.audiodata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/atom/signalProc/auxdata/index.html">atom.signalProc.auxdata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/atom/signalProc/constants/index.html">atom.signalProc.constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/atom/signalProc/traveltimeextractor/index.html">atom.signalProc.traveltimeextractor</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../autoapi/atom/simulation/index.html">atom.simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/atom/simulation/les/index.html">atom.simulation.les</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../autoapi/atom/utils/index.html">atom.utils</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fcontents/04_modelGrid_and_covarianceMatrix_20240416/04_modelGrid_and_covarianceMatrix_20240416.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/contents/04_modelGrid_and_covarianceMatrix_20240416/04_modelGrid_and_covarianceMatrix_20240416.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Covariance Matrices</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instantiate-atarray-and-constants-objects">Instantiate atarray and constants objects</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-grid-object">Model Grid object</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#covariance-matrix-object">Covariance Matrix object</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-data-covariance-matrices">Model-data covariance matrices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-data-covariance-matrix">Data-data covariance matrix</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">load_ext</span> <span class="n">autoreload</span>
+<span class="o">%</span><span class="n">autoreload</span> <span class="mi">2</span>
+
+<span class="c1"># hardware</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="c1"># analysis</span>
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<span class="c1"># vis</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;seaborn-v0_8-deep&#39;</span><span class="p">)</span>
+
+<span class="c1"># Acoustic tomography package</span>
+<span class="kn">import</span> <span class="nn">atom</span>
+<span class="c1"># configuration object</span>
+<span class="kn">from</span> <span class="nn">hydra</span> <span class="kn">import</span> <span class="n">initialize</span><span class="p">,</span> <span class="n">compose</span>
+<span class="kn">from</span> <span class="nn">hydra.utils</span> <span class="kn">import</span> <span class="n">instantiate</span>
+<span class="k">with</span> <span class="n">initialize</span><span class="p">(</span><span class="n">version_base</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">config_path</span><span class="o">=</span><span class="s2">&quot;../../conf/&quot;</span><span class="p">):</span>
+    <span class="n">cfg</span> <span class="o">=</span> <span class="n">compose</span><span class="p">(</span><span class="n">config_name</span><span class="o">=</span><span class="s2">&quot;configs&quot;</span><span class="p">,)</span>
+</pre></div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="covariance-matrices">
+<h1>Covariance Matrices<a class="headerlink" href="#covariance-matrices" title="Link to this heading">#</a></h1>
+<p>The entire methology of time-dependent stochastic inversion (TDSI) hinges on defining an optimal inverse operator that maps the data vector (containing acoustic signal travel time esimates) onto the model space (where we want to retrieve fluctuating velocity and temperature.
+$<span class="math notranslate nohighlight">\(
+\mathbf{m} = \mathbf{A}\mathbf{d}
+\)</span><span class="math notranslate nohighlight">\(
+We define the operator \)</span>\mathbf{A}$ considering the expected correlation between observed travel times and the background fluctating fields.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Coming innovation in the development of covariance matrices is expected to increase the accuracy of the AT array retrievals and may also provide benefits to the resolved turbulent structures!</p>
+</div>
+<section id="instantiate-atarray-and-constants-objects">
+<h2>Instantiate atarray and constants objects<a class="headerlink" href="#instantiate-atarray-and-constants-objects" title="Link to this heading">#</a></h2>
+<p>These objects are used later in the development of the model grid and covariance matrices.</p>
+<ul class="simple">
+<li><p>see <code class="docutils literal notranslate"><span class="pre">01_signalProcessingModule_20240410.ipynb</span></code> for guideance on the atarray object.</p></li>
+<li><p>see <code class="docutils literal notranslate"><span class="pre">03_bulkFieldEstimation_20240412.ipynb</span></code> for guideance on the linear system object.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">## Array data</span>
+<span class="n">atarray</span> <span class="o">=</span> <span class="n">instantiate</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">atarray</span><span class="p">)</span>
+<span class="n">atarray</span><span class="o">.</span><span class="n">setupPathIntegrals</span><span class="p">()</span>
+
+<span class="c1">## Constants</span>
+<span class="n">constants</span> <span class="o">=</span> <span class="n">instantiate</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">constants</span><span class="p">)</span>
+
+<span class="c1">## Bulk flow linear system</span>
+<span class="c1">### instatiate from saved data</span>
+<span class="n">ls</span> <span class="o">=</span> <span class="n">atom</span><span class="o">.</span><span class="n">backgroundFlow</span><span class="o">.</span><span class="n">linearsystem</span><span class="o">.</span><span class="n">LinearSystem</span><span class="o">.</span><span class="n">from_netcdf</span><span class="p">(</span><span class="s1">&#39;../bulkField_example_data.nc&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="model-grid-object">
+<h2>Model Grid object<a class="headerlink" href="#model-grid-object" title="Link to this heading">#</a></h2>
+<p>The model grid defines the domain where fluctuating velocity and temperature fields are to be retrieved. Inputs are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">nModelPoints(X|Y)</span></code>: the integer number of points in the X (easting) and Y (northing) directions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">modelLims(X|Y)</span></code>: the (min, max) domain limits in the X (easting) and Y (northing) directions. Should be an iterable (list, tuple, array, etc.)
+Model grid points are stacked into a dimension denoted <code class="docutils literal notranslate"><span class="pre">modelXY</span></code> with dimension <span class="math notranslate nohighlight">\(J = m_x \times m_y\)</span>.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ModelGrid object</span>
+<span class="n">mg</span> <span class="o">=</span> <span class="n">atom</span><span class="o">.</span><span class="n">fluctuatingField</span><span class="o">.</span><span class="n">ModelGrid</span><span class="p">(</span>
+    <span class="n">nModelPointsX</span><span class="o">=</span><span class="mi">51</span><span class="p">,</span> 
+    <span class="n">nModelPointsY</span><span class="o">=</span><span class="mi">51</span><span class="p">,</span> 
+    <span class="n">modelLimsX</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span><span class="mi">50</span><span class="p">]),</span> 
+    <span class="n">modelLimsY</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span><span class="mi">50</span><span class="p">])</span>
+<span class="p">)</span>
+<span class="n">mg</span><span class="o">.</span><span class="n">buildModelGrid</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mg</span><span class="o">.</span><span class="n">ds</span>
+</pre></div>
+</div>
+<div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
+<defs>
+<symbol id="icon-database" viewBox="0 0 32 32">
+<path d="M16 0c-8.837 0-16 2.239-16 5v4c0 2.761 7.163 5 16 5s16-2.239 16-5v-4c0-2.761-7.163-5-16-5z"></path>
+<path d="M16 17c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+<path d="M16 26c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+</symbol>
+<symbol id="icon-file-text2" viewBox="0 0 32 32">
+<path d="M28.681 7.159c-0.694-0.947-1.662-2.053-2.724-3.116s-2.169-2.030-3.116-2.724c-1.612-1.182-2.393-1.319-2.841-1.319h-15.5c-1.378 0-2.5 1.121-2.5 2.5v27c0 1.378 1.122 2.5 2.5 2.5h23c1.378 0 2.5-1.122 2.5-2.5v-19.5c0-0.448-0.137-1.23-1.319-2.841zM24.543 5.457c0.959 0.959 1.712 1.825 2.268 2.543h-4.811v-4.811c0.718 0.556 1.584 1.309 2.543 2.268zM28 29.5c0 0.271-0.229 0.5-0.5 0.5h-23c-0.271 0-0.5-0.229-0.5-0.5v-27c0-0.271 0.229-0.5 0.5-0.5 0 0 15.499-0 15.5 0v7c0 0.552 0.448 1 1 1h7v19.5z"></path>
+<path d="M23 26h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 22h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 18h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+</symbol>
+</defs>
+</svg>
+<style>/* CSS stylesheet for displaying xarray objects in jupyterlab.
+ *
+ */
+<p>:root {
+–xr-font-color0: var(–jp-content-font-color0, rgba(0, 0, 0, 1));
+–xr-font-color2: var(–jp-content-font-color2, rgba(0, 0, 0, 0.54));
+–xr-font-color3: var(–jp-content-font-color3, rgba(0, 0, 0, 0.38));
+–xr-border-color: var(–jp-border-color2, #e0e0e0);
+–xr-disabled-color: var(–jp-layout-color3, #bdbdbd);
+–xr-background-color: var(–jp-layout-color0, white);
+–xr-background-color-row-even: var(–jp-layout-color1, white);
+–xr-background-color-row-odd: var(–jp-layout-color2, #eeeeee);
+}</p>
+<p>html[theme=dark],
+body[data-theme=dark],
+body.vscode-dark {
+–xr-font-color0: rgba(255, 255, 255, 1);
+–xr-font-color2: rgba(255, 255, 255, 0.54);
+–xr-font-color3: rgba(255, 255, 255, 0.38);
+–xr-border-color: #1F1F1F;
+–xr-disabled-color: #515151;
+–xr-background-color: #111111;
+–xr-background-color-row-even: #111111;
+–xr-background-color-row-odd: #313131;
+}</p>
+<p>.xr-wrap {
+display: block !important;
+min-width: 300px;
+max-width: 700px;
+}</p>
+<p>.xr-text-repr-fallback {
+/* fallback to plain text repr when CSS is not injected (untrusted notebook) */
+display: none;
+}</p>
+<p>.xr-header {
+padding-top: 6px;
+padding-bottom: 6px;
+margin-bottom: 4px;
+border-bottom: solid 1px var(–xr-border-color);
+}</p>
+<p>.xr-header &gt; div,
+.xr-header &gt; ul {
+display: inline;
+margin-top: 0;
+margin-bottom: 0;
+}</p>
+<p>.xr-obj-type,
+.xr-array-name {
+margin-left: 2px;
+margin-right: 10px;
+}</p>
+<p>.xr-obj-type {
+color: var(–xr-font-color2);
+}</p>
+<p>.xr-sections {
+padding-left: 0 !important;
+display: grid;
+grid-template-columns: 150px auto auto 1fr 20px 20px;
+}</p>
+<p>.xr-section-item {
+display: contents;
+}</p>
+<p>.xr-section-item input {
+display: none;
+}</p>
+<p>.xr-section-item input + label {
+color: var(–xr-disabled-color);
+}</p>
+<p>.xr-section-item input:enabled + label {
+cursor: pointer;
+color: var(–xr-font-color2);
+}</p>
+<p>.xr-section-item input:enabled + label:hover {
+color: var(–xr-font-color0);
+}</p>
+<p>.xr-section-summary {
+grid-column: 1;
+color: var(–xr-font-color2);
+font-weight: 500;
+}</p>
+<p>.xr-section-summary &gt; span {
+display: inline-block;
+padding-left: 0.5em;
+}</p>
+<p>.xr-section-summary-in:disabled + label {
+color: var(–xr-font-color2);
+}</p>
+<p>.xr-section-summary-in + label:before {
+display: inline-block;
+content: ‘►’;
+font-size: 11px;
+width: 15px;
+text-align: center;
+}</p>
+<p>.xr-section-summary-in:disabled + label:before {
+color: var(–xr-disabled-color);
+}</p>
+<p>.xr-section-summary-in:checked + label:before {
+content: ‘▼’;
+}</p>
+<p>.xr-section-summary-in:checked + label &gt; span {
+display: none;
+}</p>
+<p>.xr-section-summary,
+.xr-section-inline-details {
+padding-top: 4px;
+padding-bottom: 4px;
+}</p>
+<p>.xr-section-inline-details {
+grid-column: 2 / -1;
+}</p>
+<p>.xr-section-details {
+display: none;
+grid-column: 1 / -1;
+margin-bottom: 5px;
+}</p>
+<p>.xr-section-summary-in:checked ~ .xr-section-details {
+display: contents;
+}</p>
+<p>.xr-array-wrap {
+grid-column: 1 / -1;
+display: grid;
+grid-template-columns: 20px auto;
+}</p>
+<p>.xr-array-wrap &gt; label {
+grid-column: 1;
+vertical-align: top;
+}</p>
+<p>.xr-preview {
+color: var(–xr-font-color3);
+}</p>
+<p>.xr-array-preview,
+.xr-array-data {
+padding: 0 5px !important;
+grid-column: 2;
+}</p>
+<p>.xr-array-data,
+.xr-array-in:checked ~ .xr-array-preview {
+display: none;
+}</p>
+<p>.xr-array-in:checked ~ .xr-array-data,
+.xr-array-preview {
+display: inline-block;
+}</p>
+<p>.xr-dim-list {
+display: inline-block !important;
+list-style: none;
+padding: 0 !important;
+margin: 0;
+}</p>
+<p>.xr-dim-list li {
+display: inline-block;
+padding: 0;
+margin: 0;
+}</p>
+<p>.xr-dim-list:before {
+content: ‘(‘;
+}</p>
+<p>.xr-dim-list:after {
+content: ‘)’;
+}</p>
+<p>.xr-dim-list li:not(:last-child):after {
+content: ‘,’;
+padding-right: 5px;
+}</p>
+<p>.xr-has-index {
+font-weight: bold;
+}</p>
+<p>.xr-var-list,
+.xr-var-item {
+display: contents;
+}</p>
+<p>.xr-var-item &gt; div,
+.xr-var-item label,
+.xr-var-item &gt; .xr-var-name span {
+background-color: var(–xr-background-color-row-even);
+margin-bottom: 0;
+}</p>
+<p>.xr-var-item &gt; .xr-var-name:hover span {
+padding-right: 5px;
+}</p>
+<p>.xr-var-list &gt; li:nth-child(odd) &gt; div,
+.xr-var-list &gt; li:nth-child(odd) &gt; label,
+.xr-var-list &gt; li:nth-child(odd) &gt; .xr-var-name span {
+background-color: var(–xr-background-color-row-odd);
+}</p>
+<p>.xr-var-name {
+grid-column: 1;
+}</p>
+<p>.xr-var-dims {
+grid-column: 2;
+}</p>
+<p>.xr-var-dtype {
+grid-column: 3;
+text-align: right;
+color: var(–xr-font-color2);
+}</p>
+<p>.xr-var-preview {
+grid-column: 4;
+}</p>
+<p>.xr-index-preview {
+grid-column: 2 / 5;
+color: var(–xr-font-color2);
+}</p>
+<p>.xr-var-name,
+.xr-var-dims,
+.xr-var-dtype,
+.xr-preview,
+.xr-attrs dt {
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+padding-right: 10px;
+}</p>
+<p>.xr-var-name:hover,
+.xr-var-dims:hover,
+.xr-var-dtype:hover,
+.xr-attrs dt:hover {
+overflow: visible;
+width: auto;
+z-index: 1;
+}</p>
+<p>.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+display: none;
+background-color: var(–xr-background-color) !important;
+padding-bottom: 5px !important;
+}</p>
+<p>.xr-var-attrs-in:checked ~ .xr-var-attrs,
+.xr-var-data-in:checked ~ .xr-var-data,
+.xr-index-data-in:checked ~ .xr-index-data {
+display: block;
+}</p>
+<p>.xr-var-data &gt; table {
+float: right;
+}</p>
+<p>.xr-var-name span,
+.xr-var-data,
+.xr-index-name div,
+.xr-index-data,
+.xr-attrs {
+padding-left: 25px !important;
+}</p>
+<p>.xr-attrs,
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+grid-column: 1 / -1;
+}</p>
+<p>dl.xr-attrs {
+padding: 0;
+margin: 0;
+display: grid;
+grid-template-columns: 125px auto;
+}</p>
+<p>.xr-attrs dt,
+.xr-attrs dd {
+padding: 0;
+margin: 0;
+float: left;
+padding-right: 10px;
+width: auto;
+}</p>
+<p>.xr-attrs dt {
+font-weight: normal;
+grid-column: 1;
+}</p>
+<p>.xr-attrs dt:hover span {
+display: inline-block;
+background: var(–xr-background-color);
+padding-right: 10px;
+}</p>
+<p>.xr-attrs dd {
+grid-column: 2;
+white-space: pre-wrap;
+word-break: break-all;
+}</p>
+<p>.xr-icon-database,
+.xr-icon-file-text2,
+.xr-no-icon {
+display: inline-block;
+vertical-align: middle;
+width: 1em;
+height: 1.5em !important;
+stroke-width: 0;
+stroke: currentColor;
+fill: currentColor;
+}
+</style><pre class='xr-text-repr-fallback'>&lt;xarray.Dataset&gt;
+Dimensions:    (variable: 2, modelXY: 2601, x: 51, y: 51)
+Coordinates:</p>
+<ul>
+<li><p>variable   (variable) &lt;U1 ‘x’ ‘y’</p></li>
+<li><p>x          (modelXY) float64 -50.0 -50.0 -50.0 -50.0 … 50.0 50.0 50.0 50.0</p></li>
+<li><p>y          (modelXY) float64 -50.0 -48.0 -46.0 -44.0 … 44.0 46.0 48.0 50.0</p></li>
+<li><p>modelXY    (modelXY) object MultiIndex
+Data variables:
+modelGrid  (variable, x, y) float64 -50.0 -48.0 -46.0 … 50.0 50.0 50.0
+Attributes:
+description:  Model grid for TDSI solution
+unit:         m
+nx:           51
+ny:           51</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-2f569508-9f6e-4bdb-b311-3c44387453ab' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-2f569508-9f6e-4bdb-b311-3c44387453ab' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>variable</span>: 2</li><li><span class='xr-has-index'>modelXY</span>: 2601</li><li><span>x</span>: 51</li><li><span>y</span>: 51</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-88954f51-5772-4ea8-a62f-dc5377f71ea5' class='xr-section-summary-in' type='checkbox'  checked><label for='section-88954f51-5772-4ea8-a62f-dc5377f71ea5' class='xr-section-summary' >Coordinates: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>variable</span></div><div class='xr-var-dims'>(variable)</div><div class='xr-var-dtype'>&lt;U1</div><div class='xr-var-preview xr-preview'>’x’ ‘y’</div><input id='attrs-c451291e-f1d0-43c3-8caa-f95813c24710' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-c451291e-f1d0-43c3-8caa-f95813c24710' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-c5fb161c-8f89-4047-8da7-4a4ae7df2cea' class='xr-var-data-in' type='checkbox'><label for='data-c5fb161c-8f89-4047-8da7-4a4ae7df2cea' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([‘x’, ‘y’], dtype=’&lt;U1’)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>x</span></div><div class='xr-var-dims'>(modelXY)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-50.0 -50.0 -50.0 … 50.0 50.0</div><input id='attrs-b9fa578a-d40d-402d-9bfc-46a5e1e33a87' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-b9fa578a-d40d-402d-9bfc-46a5e1e33a87' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-1bf607f9-5c26-41ea-be5f-14a21e57f15c' class='xr-var-data-in' type='checkbox'><label for='data-1bf607f9-5c26-41ea-be5f-14a21e57f15c' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([-50., -50., -50., …,  50.,  50.,  50.])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>y</span></div><div class='xr-var-dims'>(modelXY)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-50.0 -48.0 -46.0 … 48.0 50.0</div><input id='attrs-f14e4c3b-55db-4b76-b4d2-385c81d3f4c8' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-f14e4c3b-55db-4b76-b4d2-385c81d3f4c8' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-74d93d2f-a7e0-47b8-888a-05592fee348c' class='xr-var-data-in' type='checkbox'><label for='data-74d93d2f-a7e0-47b8-888a-05592fee348c' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([-50., -48., -46., …,  46.,  48.,  50.])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>modelXY</span></div><div class='xr-var-dims'>(modelXY)</div><div class='xr-var-dtype'>object</div><div class='xr-var-preview xr-preview'>MultiIndex</div><input id='attrs-21e36dff-0b7e-47de-b6c8-a6608cb59135' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-21e36dff-0b7e-47de-b6c8-a6608cb59135' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-2d6c2cb7-160e-4a4b-ba60-da5bbd93df1d' class='xr-var-data-in' type='checkbox'><label for='data-2d6c2cb7-160e-4a4b-ba60-da5bbd93df1d' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([(-50.0, -50.0), (-50.0, -48.0), (-50.0, -46.0), …, (50.0, 46.0),
+(50.0, 48.0), (50.0, 50.0)], dtype=object)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-4dffb525-2d31-482e-8648-c4f4c6f17622' class='xr-section-summary-in' type='checkbox'  checked><label for='section-4dffb525-2d31-482e-8648-c4f4c6f17622' class='xr-section-summary' >Data variables: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>modelGrid</span></div><div class='xr-var-dims'>(variable, x, y)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-50.0 -48.0 -46.0 … 50.0 50.0</div><input id='attrs-df39b1d4-8030-4e42-bb84-cbb570d7e5b4' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-df39b1d4-8030-4e42-bb84-cbb570d7e5b4' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-5820ce4f-13c4-4cb7-9440-2b7fff495f5c' class='xr-var-data-in' type='checkbox'><label for='data-5820ce4f-13c4-4cb7-9440-2b7fff495f5c' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[[-50., -48., -46., …,  46.,  48.,  50.],
+[-50., -48., -46., …,  46.,  48.,  50.],
+[-50., -48., -46., …,  46.,  48.,  50.],
+…,
+[-50., -48., -46., …,  46.,  48.,  50.],
+[-50., -48., -46., …,  46.,  48.,  50.],
+[-50., -48., -46., …,  46.,  48.,  50.]],</p>
+<p>[[-50., -50., -50., …, -50., -50., -50.],
+[-48., -48., -48., …, -48., -48., -48.],
+[-46., -46., -46., …, -46., -46., -46.],
+…,
+[ 46.,  46.,  46., …,  46.,  46.,  46.],
+[ 48.,  48.,  48., …,  48.,  48.,  48.],
+[ 50.,  50.,  50., …,  50.,  50.,  50.]]])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-e22bdaf8-be37-42a2-bf04-35bc96ef4110' class='xr-section-summary-in' type='checkbox'  ><label for='section-e22bdaf8-be37-42a2-bf04-35bc96ef4110' class='xr-section-summary' >Indexes: <span>(2)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>variable</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-776a103b-d691-48de-9346-5e93b9f77229' class='xr-index-data-in' type='checkbox'/><label for='index-776a103b-d691-48de-9346-5e93b9f77229' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([‘x’, ‘y’], dtype=’object’, name=’variable’))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>x<br>y<br>modelXY</div></div><div class='xr-index-preview'>PandasMultiIndex</div><div></div><input id='index-f9f72abc-588a-4ac4-8a85-ba0ce2f41bdb' class='xr-index-data-in' type='checkbox'/><label for='index-f9f72abc-588a-4ac4-8a85-ba0ce2f41bdb' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(MultiIndex([(-50.0, -50.0),
+(-50.0, -48.0),
+(-50.0, -46.0),
+(-50.0, -44.0),
+(-50.0, -42.0),
+(-50.0, -40.0),
+(-50.0, -38.0),
+(-50.0, -36.0),
+(-50.0, -34.0),
+(-50.0, -32.0),
+…
+( 50.0,  32.0),
+( 50.0,  34.0),
+( 50.0,  36.0),
+( 50.0,  38.0),
+( 50.0,  40.0),
+( 50.0,  42.0),
+( 50.0,  44.0),
+( 50.0,  46.0),
+( 50.0,  48.0),
+( 50.0,  50.0)],
+name=’modelXY’, length=2601))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-83bbc105-189e-4413-8e00-1dd3da208afa' class='xr-section-summary-in' type='checkbox'  checked><label for='section-83bbc105-189e-4413-8e00-1dd3da208afa' class='xr-section-summary' >Attributes: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>description :</span></dt><dd>Model grid for TDSI solution</dd><dt><span>unit :</span></dt><dd>m</dd><dt><span>nx :</span></dt><dd>51</dd><dt><span>ny :</span></dt><dd>51</dd></dl></div></li></ul></div></div></p>
+</li>
+</ul>
+</section>
+<section id="covariance-matrix-object">
+<h2>Covariance Matrix object<a class="headerlink" href="#covariance-matrix-object" title="Link to this heading">#</a></h2>
+<p>Configuration data comes from the hydra configuration object.</p>
+<p>Default values:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sigmaT</span></code>: 0.14, standard devaition of the temperature fluctuations</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lT</span></code>: 15.0, length scale of the temperature fluctuations</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sigmaU</span></code>: 0.72, standard devaition of the u velocity fluctuations</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sigmaV</span></code>: 0.42, standard devaition of the v velocity fluctuations</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">l</span></code>: 15.0, length scale of the velocity fluctuations</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">timeDelay</span></code>: 0.0, time delay between successive frames. Will be updated to generalize to variable time delays between frames</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nFrames</span></code>: 0, the number of additional frames considered in the covariance matrices. A value of 0 implies simple stochastic inversion without time dependence.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">alignment</span></code>: “center”, alignment of frames in the covariance matrices (also accepts “forward” or “backward”)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">advectionScheme</span></code>: “stationary”, simplifying assumption of statistical stationarity for advection (constant advection velocity and time delay). Will be updated to include a “direct” method where the advection velocity varies between frames.</p></li>
+</ul>
+<p>This example updates nFrames to 2 to use one frame before and one frame after the target frame in the fluctuating field retrieval.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># cfg.covariancematrix[&#39;nFrames&#39;] = 2</span>
+
+<span class="n">cm</span> <span class="o">=</span> <span class="n">atom</span><span class="o">.</span><span class="n">fluctuatingField</span><span class="o">.</span><span class="n">CovarianceMatrices</span><span class="p">(</span>
+    <span class="n">cfg</span><span class="o">.</span><span class="n">covariancematrix</span><span class="p">,</span>
+    <span class="n">mg</span><span class="o">.</span><span class="n">ds</span><span class="p">,</span> 
+    <span class="n">atarray</span><span class="o">.</span><span class="n">ds</span><span class="p">,</span>
+    <span class="n">ls</span><span class="o">.</span><span class="n">ds</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">cm</span><span class="o">.</span><span class="n">assembleTDSICovarianceMatrices</span><span class="p">()</span>
+<span class="c1"># cm.to_pickle(f&#39;../covarianceMatrices_nF={cfg.covariancematrix.nFrames}_example.pk&#39;)</span>
+
+<span class="c1"># cm = atom.fluctuatingField.CovarianceMatrices.from_pickle(&#39;covarianceMatrices_nF=6.pk&#39;)</span>
+</pre></div>
+</div>
+<p>The model-data and data-data covariance matrices <span class="math notranslate nohighlight">\(B_{md}\)</span> and <span class="math notranslate nohighlight">\(B_{dd}\)</span> rely on an assumed (or imposed) distribution of covariances. Covariance functions relate fluctuations between any two points <span class="math notranslate nohighlight">\(\mathbf{r}\)</span>  and <span class="math notranslate nohighlight">\(\mathbf{r^\prime}\)</span> with a Gaussian distribution.</p>
+<p><span class="math notranslate nohighlight">\(\begin{align}
+    B^S_{TT} &amp;= \sigma_T^2 \text{exp}\left( -\frac{(\mathbf{r} - \mathbf{r}^\prime)^2}{l_T^2}\right)\label{eq:corr1},\\
+    B^S_{uu} &amp;= \sigma_u^2 \text{exp}\left( -\frac{(\mathbf{r} - \mathbf{r}^\prime)^2}{l^2}\right) \left( 1 - \frac{(y - y^\prime)^2}{l^2} \right)\label{eq:corr2},\\
+    B^S_{vv} &amp;= \sigma_v^2 \text{exp}\left( -\frac{(\mathbf{r} - \mathbf{r}^\prime)^2}{l^2}\right)\left( 1 - \frac{(x - x^\prime)^2}{l^2} \right)\label{eq:corr3},\\
+    B^S_{uv} &amp;= \sigma_u \sigma_v \text{exp}\left( -\frac{(\mathbf{r} - \mathbf{r}^\prime)^2}{l^2}\right) \left( \frac{(x - x^\prime)(y - y^\prime)}{l^2} \right)\label{eq:corr4},
+\end{align}\)</span></p>
+<p>Other distributions or covariance models can be added by replicating the structure found in <code class="docutils literal notranslate"><span class="pre">CovarianceMatrix.covarianceFunction</span></code> method. For heterogeneous fields, this function can be replaced by input data, so that <span class="math notranslate nohighlight">\(B_{md}\)</span> and <span class="math notranslate nohighlight">\(B_{dd}\)</span> map observed covariances to observed travel times directly.</p>
+<p>When considering multiple frames, as in the TDSI, the second point <span class="math notranslate nohighlight">\(\mathbf{R}^\prime\)</span> takes into account advection by the mean velocity over the time delta between frames. The covariance matrix calculation is centered by default, meaning advection takes place in a forward and a backward sense collecting the frames <span class="math notranslate nohighlight">\([\tau - N/2 * \Delta t,...,\tau,...,\tau + N/2* \Delta t]\)</span>. The algorithm takes into account edge cases at the beginning and end of the set of frames. These are defined in the <code class="docutils literal notranslate"><span class="pre">stencil</span></code> and <code class="docutils literal notranslate"><span class="pre">frameSets</span></code> attributes.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+<span class="n">pointID</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cm</span><span class="o">.</span><span class="n">ds</span><span class="o">.</span><span class="n">modelXY</span><span class="p">))</span>
+
+<span class="n">cm</span><span class="o">.</span><span class="n">ds</span><span class="o">.</span><span class="n">B_uu</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">modelXY</span><span class="o">=</span><span class="n">pointID</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">cm</span><span class="o">.</span><span class="n">ds</span><span class="o">.</span><span class="n">B_vv</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">modelXY</span><span class="o">=</span><span class="n">pointID</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">cm</span><span class="o">.</span><span class="n">ds</span><span class="o">.</span><span class="n">B_uv</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">modelXY</span><span class="o">=</span><span class="n">pointID</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">cm</span><span class="o">.</span><span class="n">ds</span><span class="o">.</span><span class="n">B_TT</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">modelXY</span><span class="o">=</span><span class="n">pointID</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><img alt="png" src="../../_images/output_9_02.png" /></p>
+<section id="model-data-covariance-matrices">
+<h3>Model-data covariance matrices<a class="headerlink" href="#model-data-covariance-matrices" title="Link to this heading">#</a></h3>
+<p>The model data covariance matrix describes correlation between observed travel times and the modeled turbulence fields. <span class="math notranslate nohighlight">\(\mathbf{B_{md}}\)</span> has a size of <span class="math notranslate nohighlight">\([ N\times I, 3\times J]\)</span> considering <span class="math notranslate nohighlight">\(N\)</span> frames in the TDSI, <span class="math notranslate nohighlight">\(I\)</span> acoustic travel paths, and <span class="math notranslate nohighlight">\(J\)</span> modeled points for each of the three variables (<span class="math notranslate nohighlight">\(u\)</span>, <span class="math notranslate nohighlight">\(v\)</span> and <span class="math notranslate nohighlight">\(T\)</span>).</p>
+<p><span class="math notranslate nohighlight">\(\begin{eqnarray}    
+    \mathbf{B}_{\mathbf{m}_j\mathbf{d}_{0i}}(t_1, t_2) &amp;=&amp; \langle m_j(t_1) d_{0i}(t_2) \rangle\\
+    &amp;=&amp; \int_{L_i} \left( \frac{c_0(t_2)}{2T_0(t_2)} \langle m_j(t_1) T(\mathbf{r},t_2) \rangle + \langle m_j(t_1) u(\mathbf{r},t_2)\rangle \text{cos}~\phi_i + \langle m_j(t_1) v(\mathbf{r},t_2)\rangle \text{sin}~\phi_i \right) dl\\
+    &amp;=&amp; \begin{cases}
+        \int_{L_i} \left( \frac{c_0(t_2)}{2T_0(t_2)}B_{TT}(\mathbf{r}_j, t_1; \mathbf{r}, t_2) \right) dl, &amp; \text{if } 1 \le j \le J \\
+        \int_{L_i} \left(B_{uu}(\mathbf{r}_j, t_1; \mathbf{r}, t_2) \text{cos}~\phi_i + B_{uv}(\mathbf{r}_j, t_1; \mathbf{r}, t_2) \text{sin}~\phi_i \right) dl, &amp; \text{if } J+1 \le j \le 2J \\
+        \int_{L_i} \left(B_{vu}(\mathbf{r}_j, t_1; \mathbf{r}, t_2) \text{cos}~\phi_i + B_{vv}(\mathbf{r}_j, t_1; \mathbf{r}, t_2) \text{sin}~\phi_i \right) dl, &amp; \text{if } 2J+1 \le j \le 3J
+  \end{cases}
+\end{eqnarray}\)</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cm</span><span class="o">.</span><span class="n">ds</span><span class="p">[</span><span class="s1">&#39;modelXY&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mg</span><span class="o">.</span><span class="n">ds</span><span class="o">.</span><span class="n">modelXY</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mf">3.5</span><span class="p">))</span>
+<span class="n">cm</span><span class="o">.</span><span class="n">ds</span><span class="o">.</span><span class="n">Bmd</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="s1">&#39;u&#39;</span><span class="p">,</span> <span class="n">tdsiFrame</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="s1">&#39;pathID&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">cm</span><span class="o">.</span><span class="n">ds</span><span class="o">.</span><span class="n">Bmd</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="s1">&#39;v&#39;</span><span class="p">,</span> <span class="n">tdsiFrame</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="s1">&#39;pathID&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">cm</span><span class="o">.</span><span class="n">ds</span><span class="o">.</span><span class="n">Bmd</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="n">tdsiFrame</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="s1">&#39;pathID&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><img alt="png" src="../../_images/output_11_0.png" /></p>
+</section>
+<section id="data-data-covariance-matrix">
+<h3>Data-data covariance matrix<a class="headerlink" href="#data-data-covariance-matrix" title="Link to this heading">#</a></h3>
+<p>The data-data covariance matrix describes auto correlation between observed data. <span class="math notranslate nohighlight">\(\mathbf{R_{dd}}\)</span> has a size of <span class="math notranslate nohighlight">\([ N\times I,  N\times I]\)</span> considering <span class="math notranslate nohighlight">\(N\)</span> frames in the TDSI and <span class="math notranslate nohighlight">\(I\)</span> acoustic travel paths.</p>
+<p><span class="math notranslate nohighlight">\(B_{dd} = \langle d_i(t_1) d_p(t_2) \rangle = \iint_{L_i, L_p}\frac{c_0(t_1) c_0(t_2)}{4 T_0(t_1)T_0(t_2)}B_{TT} + B_{uu} \cos\varphi_i\cos\varphi_p + B_{vv} \sin\varphi_i\sin\varphi_p + B_{uv} \cos\varphi_i\sin\varphi_p + B_{vu} \sin\varphi_i\cos\varphi_p d l_i d l_p\)</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">pcolor</span><span class="p">(</span><span class="n">cm</span><span class="o">.</span><span class="n">ds</span><span class="o">.</span><span class="n">Bdd</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">NI</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;tdsiFrame&#39;</span><span class="p">,</span> <span class="s1">&#39;spk&#39;</span><span class="p">,</span><span class="s1">&#39;mic&#39;</span><span class="p">],</span>
+                          <span class="n">NI_duplicate</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;tdsiFrame_duplicate&#39;</span><span class="p">,</span> <span class="s1">&#39;spk_duplicate&#39;</span><span class="p">,</span> <span class="s1">&#39;mic_duplicate&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+              
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PolyCollection at 0x7fea32304310&gt;
+</pre></div>
+</div>
+<p><img alt="png" src="../../_images/output_13_11.png" /></p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./contents/04_modelGrid_and_covarianceMatrix_20240416"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../03a_sonic_v_array_20230110/03a_sonic_v_array_20230110.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Bulk flow validation against sonic anemometer</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../05_TDSI_20240416/05_TDSI_20240416.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Time-Dependent Stochastic Inversion</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instantiate-atarray-and-constants-objects">Instantiate atarray and constants objects</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-grid-object">Model Grid object</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#covariance-matrix-object">Covariance Matrix object</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-data-covariance-matrices">Model-data covariance matrices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-data-covariance-matrix">Data-data covariance matrix</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Nicholas Hamilton
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

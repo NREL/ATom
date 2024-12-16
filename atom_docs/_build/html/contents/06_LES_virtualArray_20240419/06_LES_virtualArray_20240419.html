@@ -1,0 +1,1468 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Virtual Acoustic Tomography Array &#8212; Acoustic Travel Time Tomography</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'contents/06_LES_virtualArray_20240419/06_LES_virtualArray_20240419';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="atom" href="../../autoapi/atom/index.html" />
+    <link rel="prev" title="Time-Dependent Stochastic Inversion" href="../05_TDSI_20240416/05_TDSI_20240416.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Acoustic Travel Time Tomography</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Introduction to Acoustic Travel Time Tomography
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../gettingStarted.html">Installation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Theory Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../theory.html">Theory</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Walkthrough</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01_SignalProcessingModule_20240410/01_SignalProcessingModule_20240410.html">The <code class="docutils literal notranslate"><span class="pre">atom</span></code> Signal Processing Module</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../02_travelTimeExtractor_20240411/02_travelTimeExtractor_20240411.html">Travel Time Extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02a_travelTimeDebug_20240104/02a_travelTimeDebug_20240104.html">Travel time measurement review, validation, and bias estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_bulkFieldEstimation_20240412/03_bulkFieldEstimation_20240412.html">The <code class="docutils literal notranslate"><span class="pre">atom.backgroundFlow</span></code> module</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../03a_sonic_v_array_20230110/03a_sonic_v_array_20230110.html">Bulk flow validation against sonic anemometer</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../04_modelGrid_and_covarianceMatrix_20240416/04_modelGrid_and_covarianceMatrix_20240416.html">Covariance Matrices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_TDSI_20240416/05_TDSI_20240416.html">Time-Dependent Stochastic Inversion</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Virtual Acoustic Tomography Array</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../autoapi/atom/index.html">atom</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../autoapi/atom/backgroundFlow/index.html">atom.backgroundFlow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/atom/backgroundFlow/flowModel/index.html">atom.backgroundFlow.flowModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/atom/backgroundFlow/linearsystem/index.html">atom.backgroundFlow.linearsystem</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../autoapi/atom/fluctuatingField/index.html">atom.fluctuatingField</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/atom/fluctuatingField/covarinceMatix/index.html">atom.fluctuatingField.covarinceMatix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/atom/fluctuatingField/modelGrid/index.html">atom.fluctuatingField.modelGrid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/atom/fluctuatingField/pathSetup/index.html">atom.fluctuatingField.pathSetup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/atom/fluctuatingField/timeDependentStochasticInversion/index.html">atom.fluctuatingField.timeDependentStochasticInversion</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../autoapi/atom/signalProc/index.html">atom.signalProc</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/atom/signalProc/atarray/index.html">atom.signalProc.atarray</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/atom/signalProc/audiodata/index.html">atom.signalProc.audiodata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/atom/signalProc/auxdata/index.html">atom.signalProc.auxdata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/atom/signalProc/constants/index.html">atom.signalProc.constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/atom/signalProc/traveltimeextractor/index.html">atom.signalProc.traveltimeextractor</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../autoapi/atom/simulation/index.html">atom.simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/atom/simulation/les/index.html">atom.simulation.les</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../autoapi/atom/utils/index.html">atom.utils</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fcontents/06_LES_virtualArray_20240419/06_LES_virtualArray_20240419.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/contents/06_LES_virtualArray_20240419/06_LES_virtualArray_20240419.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Virtual Acoustic Tomography Array</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-the-model-grid">Build the model grid</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimal-data-vector">Optimal data vector</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">load_ext</span> <span class="n">autoreload</span>
+<span class="o">%</span><span class="n">autoreload</span> <span class="mi">2</span>
+
+<span class="c1"># hardware</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="c1"># analysis</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">simps</span>
+<span class="kn">from</span> <span class="nn">scipy.interpolate</span> <span class="kn">import</span> <span class="n">RegularGridInterpolator</span>
+<span class="c1"># vis</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;seaborn-v0_8-deep&#39;</span><span class="p">)</span>
+
+<span class="c1"># Acoustic tomography package</span>
+<span class="kn">import</span> <span class="nn">atom</span>
+<span class="c1"># configuration object</span>
+<span class="kn">from</span> <span class="nn">hydra</span> <span class="kn">import</span> <span class="n">initialize</span><span class="p">,</span> <span class="n">compose</span>
+<span class="kn">from</span> <span class="nn">hydra.utils</span> <span class="kn">import</span> <span class="n">instantiate</span>
+<span class="k">with</span> <span class="n">initialize</span><span class="p">(</span><span class="n">version_base</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">config_path</span><span class="o">=</span><span class="s2">&quot;../../conf/&quot;</span><span class="p">):</span>
+    <span class="n">cfg</span> <span class="o">=</span> <span class="n">compose</span><span class="p">(</span><span class="n">config_name</span><span class="o">=</span><span class="s2">&quot;configs&quot;</span><span class="p">,)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>The autoreload extension is already loaded. To reload it, use:
+  %reload_ext autoreload
+</pre></div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="virtual-acoustic-tomography-array">
+<h1>Virtual Acoustic Tomography Array<a class="headerlink" href="#virtual-acoustic-tomography-array" title="Link to this heading">#</a></h1>
+<p>One of the best ways for us to explore capabilities and limitations of the method is by creating a virual acoustic tomography array within a series of large-eddy simulations (LES).
+The virtual array comes with the unbelievable benefit of having a set of “ground truth” velocity and temperature fields that we can use as a basis for comparison of the AT retrievals.</p>
+<p>This notebook goes through the workflow for loading LES data from an offline simulation and developing AT estimates of the flow fields.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">### Array data</span>
+<span class="n">atarray</span> <span class="o">=</span> <span class="n">instantiate</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">atarray</span><span class="p">)</span>
+<span class="n">atarray</span><span class="o">.</span><span class="n">setupPathIntegrals</span><span class="p">()</span>
+<span class="n">constants</span> <span class="o">=</span> <span class="n">instantiate</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">constants</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># load LES data, estimate travel times</span>
+<span class="n">datapath</span> <span class="o">=</span> <span class="s1">&#39;/Users/nhamilt2/Documents/ATom/data/AT_array_sampling_z=9.5_6.66667Hz.nc&#39;</span>
+<span class="n">les</span> <span class="o">=</span> <span class="n">atom</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">LESData</span><span class="p">(</span><span class="n">loadPath</span><span class="o">=</span><span class="n">datapath</span><span class="p">,</span> <span class="n">atarray</span><span class="o">=</span><span class="n">atarray</span><span class="o">.</span><span class="n">ds</span><span class="p">,</span> <span class="n">constants</span><span class="o">=</span><span class="n">constants</span><span class="p">)</span>
+<span class="n">les</span><span class="o">.</span><span class="n">calculate_travel_time</span><span class="p">()</span>
+
+<span class="c1"># calculate fluctuating velocities</span>
+<span class="n">TFluc</span> <span class="o">=</span> <span class="n">les</span><span class="o">.</span><span class="n">ds</span><span class="o">.</span><span class="n">T</span> <span class="o">-</span> <span class="n">les</span><span class="o">.</span><span class="n">ds</span><span class="o">.</span><span class="n">TBulk</span>
+<span class="n">uFluc</span> <span class="o">=</span> <span class="n">les</span><span class="o">.</span><span class="n">ds</span><span class="o">.</span><span class="n">u</span> <span class="o">-</span> <span class="n">les</span><span class="o">.</span><span class="n">ds</span><span class="o">.</span><span class="n">uBulk</span>
+<span class="n">vFluc</span> <span class="o">=</span> <span class="n">les</span><span class="o">.</span><span class="n">ds</span><span class="o">.</span><span class="n">v</span> <span class="o">-</span> <span class="n">les</span><span class="o">.</span><span class="n">ds</span><span class="o">.</span><span class="n">vBulk</span>
+
+<span class="c1">#downsample to match model grid</span>
+<span class="n">lesVals</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">TFluc</span><span class="p">,</span> <span class="n">uFluc</span><span class="p">,</span> <span class="n">vFluc</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="s1">&#39;component&#39;</span><span class="p">)</span>
+<span class="n">lesVals</span><span class="p">[</span><span class="s1">&#39;component&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="s1">&#39;u&#39;</span><span class="p">,</span><span class="s1">&#39;v&#39;</span><span class="p">]</span>
+<span class="c1"># lesVals = lesVals.sel(x=mg.ds.unstack().x, y=mg.ds.unstack().y, method=&#39;nearest&#39;)</span>
+<span class="n">lesVals</span> <span class="o">=</span> <span class="n">lesVals</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">modelVar</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;component&#39;</span><span class="p">,</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">])</span>
+<span class="n">lesVals</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;modelVals&#39;</span>
+
+<span class="n">Tfluc</span> <span class="o">=</span> <span class="n">lesVals</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="s1">&#39;T&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span>
+<span class="n">ufluc</span> <span class="o">=</span> <span class="n">lesVals</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="s1">&#39;u&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span>
+<span class="n">vfluc</span> <span class="o">=</span> <span class="n">lesVals</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="s1">&#39;v&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span>
+
+<span class="n">ls</span> <span class="o">=</span> <span class="n">atom</span><span class="o">.</span><span class="n">backgroundFlow</span><span class="o">.</span><span class="n">linearsystem</span><span class="o">.</span><span class="n">LinearSystem</span><span class="p">(</span>
+    <span class="n">atarray</span><span class="o">=</span><span class="n">atarray</span><span class="o">.</span><span class="n">ds</span><span class="p">,</span>
+    <span class="n">measuredTravelTime</span><span class="o">=</span><span class="n">les</span><span class="o">.</span><span class="n">ds</span><span class="o">.</span><span class="n">travelTimes</span><span class="o">.</span><span class="n">rename</span><span class="p">({</span><span class="s1">&#39;time&#39;</span><span class="p">:</span><span class="s1">&#39;frame&#39;</span><span class="p">}),</span>
+    <span class="n">constants</span><span class="o">=</span><span class="n">constants</span>
+<span class="p">)</span>
+<span class="n">ls</span><span class="o">.</span><span class="n">executeProcess</span><span class="p">()</span>
+</pre></div>
+</div>
+<section id="build-the-model-grid">
+<h2>Build the model grid<a class="headerlink" href="#build-the-model-grid" title="Link to this heading">#</a></h2>
+<p>This is the domain where the fluctuating fields of temperature and velocity are reconstructed. In this case, we are describing a grid that matches the LES sample domain exactly so that there is no need for interpolation or downsampling when comparing field estimates.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#Build model grid</span>
+<span class="n">mg</span> <span class="o">=</span> <span class="n">atom</span><span class="o">.</span><span class="n">fluctuatingField</span><span class="o">.</span><span class="n">ModelGrid</span><span class="p">(</span>
+    <span class="n">nModelPointsX</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">lesVals</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span><span class="o">.</span><span class="n">x</span><span class="p">),</span> 
+    <span class="n">nModelPointsY</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">lesVals</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span><span class="o">.</span><span class="n">y</span><span class="p">),</span> 
+    <span class="n">modelLimsX</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">lesVals</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">lesVals</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">max</span><span class="p">()]),</span> 
+    <span class="n">modelLimsY</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">lesVals</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">lesVals</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">max</span><span class="p">()])</span>
+<span class="p">)</span>
+<span class="n">mg</span><span class="o">.</span><span class="n">buildModelGrid</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Covariance Matrix object</span>
+<span class="n">cfg</span><span class="o">.</span><span class="n">covariancematrix</span><span class="p">[</span><span class="s1">&#39;nFrames&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span>
+
+<span class="c1"># cm = atom.fluctuatingField.CovarianceMatrices(</span>
+<span class="c1">#     cfg.covariancematrix,</span>
+<span class="c1">#     mg.getDataset(), </span>
+<span class="c1">#     atarray.ds,</span>
+<span class="c1">#     ls.ds,</span>
+<span class="c1"># )</span>
+<span class="c1"># cm.assembleTDSICovarianceMatrices()</span>
+<span class="c1"># cm.to_pickle(f&#39;../covarianceMatrices_nF={cfg.covariancematrix.nFrames}_example.pk&#39;)</span>
+
+<span class="n">cm</span> <span class="o">=</span> <span class="n">atom</span><span class="o">.</span><span class="n">fluctuatingField</span><span class="o">.</span><span class="n">CovarianceMatrices</span><span class="o">.</span><span class="n">from_pickle</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;../covarianceMatrices_nF=</span><span class="si">{</span><span class="n">cfg</span><span class="o">.</span><span class="n">covariancematrix</span><span class="o">.</span><span class="n">nFrames</span><span class="si">}</span><span class="s1">_example.pk&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tdsi</span> <span class="o">=</span> <span class="n">atom</span><span class="o">.</span><span class="n">fluctuatingField</span><span class="o">.</span><span class="n">TimeDependentStochasticInversion</span><span class="p">(</span>
+    <span class="n">modelGrid</span><span class="o">=</span><span class="n">mg</span><span class="o">.</span><span class="n">ds</span><span class="p">,</span> 
+    <span class="n">atarray</span><span class="o">=</span><span class="n">atarray</span><span class="o">.</span><span class="n">ds</span><span class="p">,</span> 
+    <span class="n">covarMatrices</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">ds</span><span class="p">,</span>
+    <span class="n">bulkFlowData</span><span class="o">=</span><span class="n">ls</span><span class="o">.</span><span class="n">ds</span><span class="p">,</span>
+    <span class="n">stencil</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">stencil</span><span class="p">,</span>
+    <span class="n">frameSets</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">frameSets</span>
+<span class="p">)</span>
+
+<span class="n">tdsi</span><span class="o">.</span><span class="n">optimalStochasticInverseOperator</span><span class="p">()</span>
+<span class="n">tdsi</span><span class="o">.</span><span class="n">assembleDataVector</span><span class="p">()</span>
+<span class="n">tdsi</span><span class="o">.</span><span class="n">calculateFluctuatingFields</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="optimal-data-vector">
+<h2>Optimal data vector<a class="headerlink" href="#optimal-data-vector" title="Link to this heading">#</a></h2>
+<p>Our work so far indicates that interpolating and integrating fields along travel paths still produces some numerical error that interferes with the retrieval of fluctuating fields. To remove this numerical error, we calculate the optimal data vector <span class="math notranslate nohighlight">\(\hat{\mathbf{d}}\)</span> by mapping the LES data <span class="math notranslate nohighlight">\(\mathbf{m}\)</span> to the data space through the optimal stochastic inverse operator <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\hat{\mathbf{d}} = (\mathbf{A}^\intercal \mathbf{A})^{-1}(\mathbf{A}^\intercal \mathbf{m})\]</div>
+<p>The optimal data vector is then used as a direct replacement for the original, measured data vector to produce the optimal retrieval with the TDSI method.</p>
+<div class="math notranslate nohighlight">
+\[\hat{\mathbf{m}} = \mathbf{A}\hat{\mathbf{d}}\]</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tdsi</span><span class="o">.</span><span class="n">ds</span>
+</pre></div>
+</div>
+<div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
+<defs>
+<symbol id="icon-database" viewBox="0 0 32 32">
+<path d="M16 0c-8.837 0-16 2.239-16 5v4c0 2.761 7.163 5 16 5s16-2.239 16-5v-4c0-2.761-7.163-5-16-5z"></path>
+<path d="M16 17c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+<path d="M16 26c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+</symbol>
+<symbol id="icon-file-text2" viewBox="0 0 32 32">
+<path d="M28.681 7.159c-0.694-0.947-1.662-2.053-2.724-3.116s-2.169-2.030-3.116-2.724c-1.612-1.182-2.393-1.319-2.841-1.319h-15.5c-1.378 0-2.5 1.121-2.5 2.5v27c0 1.378 1.122 2.5 2.5 2.5h23c1.378 0 2.5-1.122 2.5-2.5v-19.5c0-0.448-0.137-1.23-1.319-2.841zM24.543 5.457c0.959 0.959 1.712 1.825 2.268 2.543h-4.811v-4.811c0.718 0.556 1.584 1.309 2.543 2.268zM28 29.5c0 0.271-0.229 0.5-0.5 0.5h-23c-0.271 0-0.5-0.229-0.5-0.5v-27c0-0.271 0.229-0.5 0.5-0.5 0 0 15.499-0 15.5 0v7c0 0.552 0.448 1 1 1h7v19.5z"></path>
+<path d="M23 26h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 22h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 18h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+</symbol>
+</defs>
+</svg>
+<style>/* CSS stylesheet for displaying xarray objects in jupyterlab.
+ *
+ */
+<p>:root {
+–xr-font-color0: var(–jp-content-font-color0, rgba(0, 0, 0, 1));
+–xr-font-color2: var(–jp-content-font-color2, rgba(0, 0, 0, 0.54));
+–xr-font-color3: var(–jp-content-font-color3, rgba(0, 0, 0, 0.38));
+–xr-border-color: var(–jp-border-color2, #e0e0e0);
+–xr-disabled-color: var(–jp-layout-color3, #bdbdbd);
+–xr-background-color: var(–jp-layout-color0, white);
+–xr-background-color-row-even: var(–jp-layout-color1, white);
+–xr-background-color-row-odd: var(–jp-layout-color2, #eeeeee);
+}</p>
+<p>html[theme=dark],
+body[data-theme=dark],
+body.vscode-dark {
+–xr-font-color0: rgba(255, 255, 255, 1);
+–xr-font-color2: rgba(255, 255, 255, 0.54);
+–xr-font-color3: rgba(255, 255, 255, 0.38);
+–xr-border-color: #1F1F1F;
+–xr-disabled-color: #515151;
+–xr-background-color: #111111;
+–xr-background-color-row-even: #111111;
+–xr-background-color-row-odd: #313131;
+}</p>
+<p>.xr-wrap {
+display: block !important;
+min-width: 300px;
+max-width: 700px;
+}</p>
+<p>.xr-text-repr-fallback {
+/* fallback to plain text repr when CSS is not injected (untrusted notebook) */
+display: none;
+}</p>
+<p>.xr-header {
+padding-top: 6px;
+padding-bottom: 6px;
+margin-bottom: 4px;
+border-bottom: solid 1px var(–xr-border-color);
+}</p>
+<p>.xr-header &gt; div,
+.xr-header &gt; ul {
+display: inline;
+margin-top: 0;
+margin-bottom: 0;
+}</p>
+<p>.xr-obj-type,
+.xr-array-name {
+margin-left: 2px;
+margin-right: 10px;
+}</p>
+<p>.xr-obj-type {
+color: var(–xr-font-color2);
+}</p>
+<p>.xr-sections {
+padding-left: 0 !important;
+display: grid;
+grid-template-columns: 150px auto auto 1fr 20px 20px;
+}</p>
+<p>.xr-section-item {
+display: contents;
+}</p>
+<p>.xr-section-item input {
+display: none;
+}</p>
+<p>.xr-section-item input + label {
+color: var(–xr-disabled-color);
+}</p>
+<p>.xr-section-item input:enabled + label {
+cursor: pointer;
+color: var(–xr-font-color2);
+}</p>
+<p>.xr-section-item input:enabled + label:hover {
+color: var(–xr-font-color0);
+}</p>
+<p>.xr-section-summary {
+grid-column: 1;
+color: var(–xr-font-color2);
+font-weight: 500;
+}</p>
+<p>.xr-section-summary &gt; span {
+display: inline-block;
+padding-left: 0.5em;
+}</p>
+<p>.xr-section-summary-in:disabled + label {
+color: var(–xr-font-color2);
+}</p>
+<p>.xr-section-summary-in + label:before {
+display: inline-block;
+content: ‘►’;
+font-size: 11px;
+width: 15px;
+text-align: center;
+}</p>
+<p>.xr-section-summary-in:disabled + label:before {
+color: var(–xr-disabled-color);
+}</p>
+<p>.xr-section-summary-in:checked + label:before {
+content: ‘▼’;
+}</p>
+<p>.xr-section-summary-in:checked + label &gt; span {
+display: none;
+}</p>
+<p>.xr-section-summary,
+.xr-section-inline-details {
+padding-top: 4px;
+padding-bottom: 4px;
+}</p>
+<p>.xr-section-inline-details {
+grid-column: 2 / -1;
+}</p>
+<p>.xr-section-details {
+display: none;
+grid-column: 1 / -1;
+margin-bottom: 5px;
+}</p>
+<p>.xr-section-summary-in:checked ~ .xr-section-details {
+display: contents;
+}</p>
+<p>.xr-array-wrap {
+grid-column: 1 / -1;
+display: grid;
+grid-template-columns: 20px auto;
+}</p>
+<p>.xr-array-wrap &gt; label {
+grid-column: 1;
+vertical-align: top;
+}</p>
+<p>.xr-preview {
+color: var(–xr-font-color3);
+}</p>
+<p>.xr-array-preview,
+.xr-array-data {
+padding: 0 5px !important;
+grid-column: 2;
+}</p>
+<p>.xr-array-data,
+.xr-array-in:checked ~ .xr-array-preview {
+display: none;
+}</p>
+<p>.xr-array-in:checked ~ .xr-array-data,
+.xr-array-preview {
+display: inline-block;
+}</p>
+<p>.xr-dim-list {
+display: inline-block !important;
+list-style: none;
+padding: 0 !important;
+margin: 0;
+}</p>
+<p>.xr-dim-list li {
+display: inline-block;
+padding: 0;
+margin: 0;
+}</p>
+<p>.xr-dim-list:before {
+content: ‘(‘;
+}</p>
+<p>.xr-dim-list:after {
+content: ‘)’;
+}</p>
+<p>.xr-dim-list li:not(:last-child):after {
+content: ‘,’;
+padding-right: 5px;
+}</p>
+<p>.xr-has-index {
+font-weight: bold;
+}</p>
+<p>.xr-var-list,
+.xr-var-item {
+display: contents;
+}</p>
+<p>.xr-var-item &gt; div,
+.xr-var-item label,
+.xr-var-item &gt; .xr-var-name span {
+background-color: var(–xr-background-color-row-even);
+margin-bottom: 0;
+}</p>
+<p>.xr-var-item &gt; .xr-var-name:hover span {
+padding-right: 5px;
+}</p>
+<p>.xr-var-list &gt; li:nth-child(odd) &gt; div,
+.xr-var-list &gt; li:nth-child(odd) &gt; label,
+.xr-var-list &gt; li:nth-child(odd) &gt; .xr-var-name span {
+background-color: var(–xr-background-color-row-odd);
+}</p>
+<p>.xr-var-name {
+grid-column: 1;
+}</p>
+<p>.xr-var-dims {
+grid-column: 2;
+}</p>
+<p>.xr-var-dtype {
+grid-column: 3;
+text-align: right;
+color: var(–xr-font-color2);
+}</p>
+<p>.xr-var-preview {
+grid-column: 4;
+}</p>
+<p>.xr-index-preview {
+grid-column: 2 / 5;
+color: var(–xr-font-color2);
+}</p>
+<p>.xr-var-name,
+.xr-var-dims,
+.xr-var-dtype,
+.xr-preview,
+.xr-attrs dt {
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+padding-right: 10px;
+}</p>
+<p>.xr-var-name:hover,
+.xr-var-dims:hover,
+.xr-var-dtype:hover,
+.xr-attrs dt:hover {
+overflow: visible;
+width: auto;
+z-index: 1;
+}</p>
+<p>.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+display: none;
+background-color: var(–xr-background-color) !important;
+padding-bottom: 5px !important;
+}</p>
+<p>.xr-var-attrs-in:checked ~ .xr-var-attrs,
+.xr-var-data-in:checked ~ .xr-var-data,
+.xr-index-data-in:checked ~ .xr-index-data {
+display: block;
+}</p>
+<p>.xr-var-data &gt; table {
+float: right;
+}</p>
+<p>.xr-var-name span,
+.xr-var-data,
+.xr-index-name div,
+.xr-index-data,
+.xr-attrs {
+padding-left: 25px !important;
+}</p>
+<p>.xr-attrs,
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+grid-column: 1 / -1;
+}</p>
+<p>dl.xr-attrs {
+padding: 0;
+margin: 0;
+display: grid;
+grid-template-columns: 125px auto;
+}</p>
+<p>.xr-attrs dt,
+.xr-attrs dd {
+padding: 0;
+margin: 0;
+float: left;
+padding-right: 10px;
+width: auto;
+}</p>
+<p>.xr-attrs dt {
+font-weight: normal;
+grid-column: 1;
+}</p>
+<p>.xr-attrs dt:hover span {
+display: inline-block;
+background: var(–xr-background-color);
+padding-right: 10px;
+}</p>
+<p>.xr-attrs dd {
+grid-column: 2;
+white-space: pre-wrap;
+word-break: break-all;
+}</p>
+<p>.xr-icon-database,
+.xr-icon-file-text2,
+.xr-no-icon {
+display: inline-block;
+vertical-align: middle;
+width: 1em;
+height: 1.5em !important;
+stroke-width: 0;
+stroke: currentColor;
+fill: currentColor;
+}
+</style><pre class='xr-text-repr-fallback'>&lt;xarray.Dataset&gt;
+Dimensions:                    (modelVar: 19683, pathID: 280, frame: 4002)
+Coordinates:</p>
+<ul class="simple">
+<li><p>modelVar                   (modelVar) object MultiIndex</p></li>
+<li><p>component                  (modelVar) object ‘T’ ‘T’ ‘T’ ‘T’ … ‘v’ ‘v’ ‘v’</p></li>
+<li><p>modelXY                    (modelVar) object (-50.0, -50.0) … (50.0, 50.0)</p></li>
+<li><p>pathID                     (pathID) object MultiIndex</p></li>
+<li><p>tdsiFrame                  (pathID) int64 -2 -2 -2 -2 -2 -2 … 2 2 2 2 2 2</p></li>
+<li><p>spk                        (pathID) int64 0 0 0 0 0 0 0 1 … 7 7 7 7 7 7 7</p></li>
+<li><p>mic                        (pathID) int64 1 2 3 4 5 6 7 0 … 0 1 2 3 4 5 6</p></li>
+<li><p>frame                      (frame) float64 0.0 0.15 0.3 … 600.0 600.1
+Data variables:
+stochasticInverseOperator  (modelVar, pathID) float64 -0.1048 … 1.596
+dataVector                 (frame, pathID) float64 -17.74 -24.57 … -4.48
+modelValues                (modelVar, frame) float64 -186.2 -186.2 … 25.16</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-2462cd52-8a1b-40c4-b061-c753324b95c4' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-2462cd52-8a1b-40c4-b061-c753324b95c4' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>modelVar</span>: 19683</li><li><span class='xr-has-index'>pathID</span>: 280</li><li><span class='xr-has-index'>frame</span>: 4002</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-e3b07661-dc2d-4103-9281-522afb8cbf4b' class='xr-section-summary-in' type='checkbox'  checked><label for='section-e3b07661-dc2d-4103-9281-522afb8cbf4b' class='xr-section-summary' >Coordinates: <span>(8)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>modelVar</span></div><div class='xr-var-dims'>(modelVar)</div><div class='xr-var-dtype'>object</div><div class='xr-var-preview xr-preview'>MultiIndex</div><input id='attrs-524244c7-5345-403e-b414-204aed589edc' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-524244c7-5345-403e-b414-204aed589edc' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-ec12b2b4-576f-43d4-b2f8-5f8d438aabf9' class='xr-var-data-in' type='checkbox'><label for='data-ec12b2b4-576f-43d4-b2f8-5f8d438aabf9' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([(‘T’, (-50.0, -50.0)), (‘T’, (-50.0, -48.75)), (‘T’, (-50.0, -47.5)),
+…, (‘v’, (50.0, 47.5)), (‘v’, (50.0, 48.75)), (‘v’, (50.0, 50.0))],
+dtype=object)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>component</span></div><div class='xr-var-dims'>(modelVar)</div><div class='xr-var-dtype'>object</div><div class='xr-var-preview xr-preview'>’T’ ‘T’ ‘T’ ‘T’ … ‘v’ ‘v’ ‘v’ ‘v’</div><input id='attrs-22e534f1-c1c6-4c35-ba42-8b604f4f3bee' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-22e534f1-c1c6-4c35-ba42-8b604f4f3bee' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-12ac3107-00fa-4804-b502-4925f287eb12' class='xr-var-data-in' type='checkbox'><label for='data-12ac3107-00fa-4804-b502-4925f287eb12' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([‘T’, ‘T’, ‘T’, …, ‘v’, ‘v’, ‘v’], dtype=object)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>modelXY</span></div><div class='xr-var-dims'>(modelVar)</div><div class='xr-var-dtype'>object</div><div class='xr-var-preview xr-preview'>(-50.0, -50.0) … (50.0, 50.0)</div><input id='attrs-0e9cc667-3a85-4d7f-87a8-24cf140dbfa1' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-0e9cc667-3a85-4d7f-87a8-24cf140dbfa1' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-18bea66b-4a74-436e-8395-087f92b8ca31' class='xr-var-data-in' type='checkbox'><label for='data-18bea66b-4a74-436e-8395-087f92b8ca31' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([(-50.0, -50.0), (-50.0, -48.75), (-50.0, -47.5), …, (50.0, 47.5),
+(50.0, 48.75), (50.0, 50.0)], dtype=object)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>pathID</span></div><div class='xr-var-dims'>(pathID)</div><div class='xr-var-dtype'>object</div><div class='xr-var-preview xr-preview'>MultiIndex</div><input id='attrs-ebb9cebf-9d3b-4c7f-9d79-75f37838ab46' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-ebb9cebf-9d3b-4c7f-9d79-75f37838ab46' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-cf930f2c-b853-4b4d-a611-0a22278edb2b' class='xr-var-data-in' type='checkbox'><label for='data-cf930f2c-b853-4b4d-a611-0a22278edb2b' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([(-2, 0, 1), (-2, 0, 2), (-2, 0, 3), …, (2, 7, 4), (2, 7, 5),
+(2, 7, 6)], dtype=object)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>tdsiFrame</span></div><div class='xr-var-dims'>(pathID)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>-2 -2 -2 -2 -2 -2 … 2 2 2 2 2 2</div><input id='attrs-5d3e6607-1807-40e4-ac23-7cd3da9bfcb2' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-5d3e6607-1807-40e4-ac23-7cd3da9bfcb2' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-309f756a-bbd6-4741-a648-0e5d88106464' class='xr-var-data-in' type='checkbox'><label for='data-309f756a-bbd6-4741-a648-0e5d88106464' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([-2, -2, -2, …,  2,  2,  2])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>spk</span></div><div class='xr-var-dims'>(pathID)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0 0 0 0 0 0 0 1 … 6 7 7 7 7 7 7 7</div><input id='attrs-575b609a-2610-40cd-bbcd-ed360951d526' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-575b609a-2610-40cd-bbcd-ed360951d526' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-79923700-9c18-4625-a9b2-d544932a98c3' class='xr-var-data-in' type='checkbox'><label for='data-79923700-9c18-4625-a9b2-d544932a98c3' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([0, 0, 0, …, 7, 7, 7])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>mic</span></div><div class='xr-var-dims'>(pathID)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>1 2 3 4 5 6 7 0 … 7 0 1 2 3 4 5 6</div><input id='attrs-afe0db92-a7d3-4409-925d-e53bbf6eeeb3' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-afe0db92-a7d3-4409-925d-e53bbf6eeeb3' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-c25db992-84cf-4b71-a884-ef9df2166ae7' class='xr-var-data-in' type='checkbox'><label for='data-c25db992-84cf-4b71-a884-ef9df2166ae7' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([1, 2, 3, …, 4, 5, 6])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>frame</span></div><div class='xr-var-dims'>(frame)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.0 0.15 0.3 … 599.8 600.0 600.1</div><input id='attrs-ba27eb49-1057-4b17-b957-560898e811c7' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-ba27eb49-1057-4b17-b957-560898e811c7' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-6a26ee2c-2460-4a23-b218-512108439acc' class='xr-var-data-in' type='checkbox'><label for='data-6a26ee2c-2460-4a23-b218-512108439acc' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([0.0000e+00, 1.5000e-01, 3.0000e-01, …, 5.9985e+02, 6.0000e+02,
+6.0015e+02])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-345a80c6-cd1e-4b3f-a54d-561a839d0d65' class='xr-section-summary-in' type='checkbox'  checked><label for='section-345a80c6-cd1e-4b3f-a54d-561a839d0d65' class='xr-section-summary' >Data variables: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>stochasticInverseOperator</span></div><div class='xr-var-dims'>(modelVar, pathID)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-0.1048 0.2617 … -1.424 1.596</div><input id='attrs-a15a17c7-fd95-4d81-a308-f8066b05c032' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-a15a17c7-fd95-4d81-a308-f8066b05c032' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-17072fdf-7339-4c20-9f93-46f7f807bb80' class='xr-var-data-in' type='checkbox'><label for='data-17072fdf-7339-4c20-9f93-46f7f807bb80' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[-0.10479617,  0.26173879,  0.0600557 , …,  0.78729672,
+0.50726869, -0.49634861],
+[-0.1420486 ,  0.32680324,  0.0901896 , …,  0.9573335 ,
+0.62844129, -0.61182392],
+[-0.1895798 ,  0.40290773,  0.13017074, …,  1.14642528,
+0.76899235, -0.74430722],
+…,
+[ 1.45411679, -0.83694119, -1.9108053 , …, -0.82670012,
+-1.43041385,  1.70367675],
+[ 1.41615646, -0.79368301, -1.94673254, …, -0.63371813,
+-1.45658668,  1.67772596],
+[ 1.33997234, -0.73081423, -1.90820363, …, -0.45475834,
+-1.42368504,  1.59618768]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>dataVector</span></div><div class='xr-var-dims'>(frame, pathID)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-17.74 -24.57 9.57 … 1.487 -4.48</div><input id='attrs-22f75731-ef37-434f-9460-b5e670e2a97c' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-22f75731-ef37-434f-9460-b5e670e2a97c' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-3fa87e7b-3ce5-4863-be56-3a49bad690ce' class='xr-var-data-in' type='checkbox'><label for='data-3fa87e7b-3ce5-4863-be56-3a49bad690ce' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[-17.73945745, -24.57434825,   9.56957852, …,  12.19958658,
+13.25777176,  11.15120759],
+[-17.73945745, -24.57434825,   9.56957852, …,  12.19958658,
+13.25777176,  11.15120759],
+[-17.73945745, -24.57434825,   9.56957852, …,  12.19958658,
+13.25777176,  11.15120759],
+…,
+[  5.5201611 ,   9.27745342,  12.49023179, …,   3.47994111,
+1.48684954,  -4.47974251],
+[  5.5201611 ,   9.27745342,  12.49023179, …,   3.47994111,
+1.48684954,  -4.47974251],
+[  5.5201611 ,   9.27745342,  12.49023179, …,   3.47994111,
+1.48684954,  -4.47974251]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>modelValues</span></div><div class='xr-var-dims'>(modelVar, frame)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-186.2 -186.2 … 25.16 25.16</div><input id='attrs-7a907bb4-e650-41d2-8843-c2a91a98f4ee' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-7a907bb4-e650-41d2-8843-c2a91a98f4ee' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-718104db-0298-4622-821a-24b9439600d8' class='xr-var-data-in' type='checkbox'><label for='data-718104db-0298-4622-821a-24b9439600d8' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[-186.15279331, -186.15279331, -186.15279331, …,   19.86787019,
+19.86787019,   19.86787019],
+[-230.51711487, -230.51711487, -230.51711487, …,   24.21306548,
+24.21306548,   24.21306548],
+[-281.59066837, -281.59066837, -281.59066837, …,   29.03888187,
+29.03888187,   29.03888187],
+…,
+[-269.76956491, -269.76956491, -269.76956491, …,   20.04861593,
+20.04861593,   20.04861593],
+[-253.26103392, -253.26103392, -253.26103392, …,   22.98771216,
+22.98771216,   22.98771216],
+[-236.10725288, -236.10725288, -236.10725288, …,   25.15959475,
+25.15959475,   25.15959475]])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-91880183-4ecf-4dcb-8406-b2541d526ca8' class='xr-section-summary-in' type='checkbox'  ><label for='section-91880183-4ecf-4dcb-8406-b2541d526ca8' class='xr-section-summary' >Indexes: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>modelVar<br>component<br>modelXY</div></div><div class='xr-index-preview'>PandasMultiIndex</div><div></div><input id='index-efa47fa4-fc16-4c47-9287-c84115252b56' class='xr-index-data-in' type='checkbox'/><label for='index-efa47fa4-fc16-4c47-9287-c84115252b56' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(MultiIndex([(‘T’,  (-50.0, -50.0)),
+(‘T’, (-50.0, -48.75)),
+(‘T’,  (-50.0, -47.5)),
+(‘T’, (-50.0, -46.25)),
+(‘T’,  (-50.0, -45.0)),
+(‘T’, (-50.0, -43.75)),
+(‘T’,  (-50.0, -42.5)),
+(‘T’, (-50.0, -41.25)),
+(‘T’,  (-50.0, -40.0)),
+(‘T’, (-50.0, -38.75)),
+…
+(‘v’,   (50.0, 38.75)),
+(‘v’,    (50.0, 40.0)),
+(‘v’,   (50.0, 41.25)),
+(‘v’,    (50.0, 42.5)),
+(‘v’,   (50.0, 43.75)),
+(‘v’,    (50.0, 45.0)),
+(‘v’,   (50.0, 46.25)),
+(‘v’,    (50.0, 47.5)),
+(‘v’,   (50.0, 48.75)),
+(‘v’,    (50.0, 50.0))],
+name=’modelVar’, length=19683))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>pathID<br>tdsiFrame<br>spk<br>mic</div></div><div class='xr-index-preview'>PandasMultiIndex</div><div></div><input id='index-ceaa1c85-6d7c-4ff2-9ea8-3049c073c42c' class='xr-index-data-in' type='checkbox'/><label for='index-ceaa1c85-6d7c-4ff2-9ea8-3049c073c42c' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(MultiIndex([(-2, 0, 1),
+(-2, 0, 2),
+(-2, 0, 3),
+(-2, 0, 4),
+(-2, 0, 5),
+(-2, 0, 6),
+(-2, 0, 7),
+(-2, 1, 0),
+(-2, 1, 2),
+(-2, 1, 3),
+…
+( 2, 6, 4),
+( 2, 6, 5),
+( 2, 6, 7),
+( 2, 7, 0),
+( 2, 7, 1),
+( 2, 7, 2),
+( 2, 7, 3),
+( 2, 7, 4),
+( 2, 7, 5),
+( 2, 7, 6)],
+name=’pathID’, length=280))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>frame</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-55754e55-914d-4e44-84f3-87340e9069d8' class='xr-index-data-in' type='checkbox'/><label for='index-55754e55-914d-4e44-84f3-87340e9069d8' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Float64Index([               0.0, 0.1499999999996362, 0.2999999999992724,
+0.4499999999989086, 0.5999999999985448,  0.749999999998181,
+0.8999999999978172, 1.0499999999974534, 1.1999999999970896,
+1.3499999999967258,
+…
+598.7999999985477,  598.9499999985474,   599.099999998547,
+599.2499999985466,  599.3999999985463,  599.5499999985459,
+599.6999999985455,  599.8499999985452,  599.9999999985448,
+600.1499999985444],
+dtype=’float64’, name=’frame’, length=4002))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-27249a7b-8567-4f38-9b71-350974a913b4' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-27249a7b-8567-4f38-9b71-350974a913b4' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># estimate optimal data vector (map backward)</span>
+<span class="n">ATA</span> <span class="o">=</span> <span class="n">tdsi</span><span class="o">.</span><span class="n">ds</span><span class="o">.</span><span class="n">stochasticInverseOperator</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">values</span> <span class="o">@</span> <span class="n">tdsi</span><span class="o">.</span><span class="n">ds</span><span class="o">.</span><span class="n">stochasticInverseOperator</span><span class="o">.</span><span class="n">values</span>
+<span class="n">optimalDataVector</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">pinv</span><span class="p">(</span><span class="n">ATA</span><span class="p">)</span> <span class="o">@</span> <span class="p">(</span><span class="n">tdsi</span><span class="o">.</span><span class="n">ds</span><span class="o">.</span><span class="n">stochasticInverseOperator</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">lesVals</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<span class="c1"># estimate model state (map forward again)</span>
+<span class="n">retreival</span> <span class="o">=</span> <span class="n">tdsi</span><span class="o">.</span><span class="n">ds</span><span class="o">.</span><span class="n">stochasticInverseOperator</span><span class="o">.</span><span class="n">values</span> <span class="o">@</span> <span class="n">optimalDataVector</span>
+<span class="n">coords</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;component&#39;</span><span class="p">:[</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="s1">&#39;u&#39;</span><span class="p">,</span><span class="s1">&#39;v&#39;</span><span class="p">],</span> 
+    <span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">mg</span><span class="o">.</span><span class="n">ds</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+    <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">mg</span><span class="o">.</span><span class="n">ds</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+    <span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="n">tdsi</span><span class="o">.</span><span class="n">ds</span><span class="o">.</span><span class="n">frame</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+ <span class="p">}</span>
+<span class="n">retreival</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">retreival</span><span class="o">.</span><span class="n">reshape</span><span class="p">([</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">4002</span><span class="p">,]),</span> <span class="n">coords</span><span class="o">=</span><span class="n">coords</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">timeID</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">4002</span><span class="p">)</span>
+<span class="n">time</span> <span class="o">=</span> <span class="n">retreival</span><span class="o">.</span><span class="n">time</span><span class="p">[</span><span class="n">timeID</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">7</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">ic</span><span class="p">,</span> <span class="n">comp</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">retreival</span><span class="o">.</span><span class="n">component</span><span class="p">):</span>
+    <span class="n">lesVals</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">time</span><span class="p">,</span> <span class="n">component</span><span class="o">=</span><span class="n">comp</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">ic</span><span class="p">])</span>
+    <span class="n">retreival</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">time</span><span class="p">,</span> <span class="n">component</span><span class="o">=</span><span class="n">comp</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">ic</span><span class="p">])</span>
+    
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><img alt="png" src="../../_images/output_11_01.png" /></p>
+<p>The problem size can be greatly reduced by decreasing the number of points considered in the model grid.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mg</span><span class="o">.</span><span class="n">ds</span>
+</pre></div>
+</div>
+<div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
+<defs>
+<symbol id="icon-database" viewBox="0 0 32 32">
+<path d="M16 0c-8.837 0-16 2.239-16 5v4c0 2.761 7.163 5 16 5s16-2.239 16-5v-4c0-2.761-7.163-5-16-5z"></path>
+<path d="M16 17c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+<path d="M16 26c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+</symbol>
+<symbol id="icon-file-text2" viewBox="0 0 32 32">
+<path d="M28.681 7.159c-0.694-0.947-1.662-2.053-2.724-3.116s-2.169-2.030-3.116-2.724c-1.612-1.182-2.393-1.319-2.841-1.319h-15.5c-1.378 0-2.5 1.121-2.5 2.5v27c0 1.378 1.122 2.5 2.5 2.5h23c1.378 0 2.5-1.122 2.5-2.5v-19.5c0-0.448-0.137-1.23-1.319-2.841zM24.543 5.457c0.959 0.959 1.712 1.825 2.268 2.543h-4.811v-4.811c0.718 0.556 1.584 1.309 2.543 2.268zM28 29.5c0 0.271-0.229 0.5-0.5 0.5h-23c-0.271 0-0.5-0.229-0.5-0.5v-27c0-0.271 0.229-0.5 0.5-0.5 0 0 15.499-0 15.5 0v7c0 0.552 0.448 1 1 1h7v19.5z"></path>
+<path d="M23 26h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 22h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 18h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+</symbol>
+</defs>
+</svg>
+<style>/* CSS stylesheet for displaying xarray objects in jupyterlab.
+ *
+ */
+<p>:root {
+–xr-font-color0: var(–jp-content-font-color0, rgba(0, 0, 0, 1));
+–xr-font-color2: var(–jp-content-font-color2, rgba(0, 0, 0, 0.54));
+–xr-font-color3: var(–jp-content-font-color3, rgba(0, 0, 0, 0.38));
+–xr-border-color: var(–jp-border-color2, #e0e0e0);
+–xr-disabled-color: var(–jp-layout-color3, #bdbdbd);
+–xr-background-color: var(–jp-layout-color0, white);
+–xr-background-color-row-even: var(–jp-layout-color1, white);
+–xr-background-color-row-odd: var(–jp-layout-color2, #eeeeee);
+}</p>
+<p>html[theme=dark],
+body[data-theme=dark],
+body.vscode-dark {
+–xr-font-color0: rgba(255, 255, 255, 1);
+–xr-font-color2: rgba(255, 255, 255, 0.54);
+–xr-font-color3: rgba(255, 255, 255, 0.38);
+–xr-border-color: #1F1F1F;
+–xr-disabled-color: #515151;
+–xr-background-color: #111111;
+–xr-background-color-row-even: #111111;
+–xr-background-color-row-odd: #313131;
+}</p>
+<p>.xr-wrap {
+display: block !important;
+min-width: 300px;
+max-width: 700px;
+}</p>
+<p>.xr-text-repr-fallback {
+/* fallback to plain text repr when CSS is not injected (untrusted notebook) */
+display: none;
+}</p>
+<p>.xr-header {
+padding-top: 6px;
+padding-bottom: 6px;
+margin-bottom: 4px;
+border-bottom: solid 1px var(–xr-border-color);
+}</p>
+<p>.xr-header &gt; div,
+.xr-header &gt; ul {
+display: inline;
+margin-top: 0;
+margin-bottom: 0;
+}</p>
+<p>.xr-obj-type,
+.xr-array-name {
+margin-left: 2px;
+margin-right: 10px;
+}</p>
+<p>.xr-obj-type {
+color: var(–xr-font-color2);
+}</p>
+<p>.xr-sections {
+padding-left: 0 !important;
+display: grid;
+grid-template-columns: 150px auto auto 1fr 20px 20px;
+}</p>
+<p>.xr-section-item {
+display: contents;
+}</p>
+<p>.xr-section-item input {
+display: none;
+}</p>
+<p>.xr-section-item input + label {
+color: var(–xr-disabled-color);
+}</p>
+<p>.xr-section-item input:enabled + label {
+cursor: pointer;
+color: var(–xr-font-color2);
+}</p>
+<p>.xr-section-item input:enabled + label:hover {
+color: var(–xr-font-color0);
+}</p>
+<p>.xr-section-summary {
+grid-column: 1;
+color: var(–xr-font-color2);
+font-weight: 500;
+}</p>
+<p>.xr-section-summary &gt; span {
+display: inline-block;
+padding-left: 0.5em;
+}</p>
+<p>.xr-section-summary-in:disabled + label {
+color: var(–xr-font-color2);
+}</p>
+<p>.xr-section-summary-in + label:before {
+display: inline-block;
+content: ‘►’;
+font-size: 11px;
+width: 15px;
+text-align: center;
+}</p>
+<p>.xr-section-summary-in:disabled + label:before {
+color: var(–xr-disabled-color);
+}</p>
+<p>.xr-section-summary-in:checked + label:before {
+content: ‘▼’;
+}</p>
+<p>.xr-section-summary-in:checked + label &gt; span {
+display: none;
+}</p>
+<p>.xr-section-summary,
+.xr-section-inline-details {
+padding-top: 4px;
+padding-bottom: 4px;
+}</p>
+<p>.xr-section-inline-details {
+grid-column: 2 / -1;
+}</p>
+<p>.xr-section-details {
+display: none;
+grid-column: 1 / -1;
+margin-bottom: 5px;
+}</p>
+<p>.xr-section-summary-in:checked ~ .xr-section-details {
+display: contents;
+}</p>
+<p>.xr-array-wrap {
+grid-column: 1 / -1;
+display: grid;
+grid-template-columns: 20px auto;
+}</p>
+<p>.xr-array-wrap &gt; label {
+grid-column: 1;
+vertical-align: top;
+}</p>
+<p>.xr-preview {
+color: var(–xr-font-color3);
+}</p>
+<p>.xr-array-preview,
+.xr-array-data {
+padding: 0 5px !important;
+grid-column: 2;
+}</p>
+<p>.xr-array-data,
+.xr-array-in:checked ~ .xr-array-preview {
+display: none;
+}</p>
+<p>.xr-array-in:checked ~ .xr-array-data,
+.xr-array-preview {
+display: inline-block;
+}</p>
+<p>.xr-dim-list {
+display: inline-block !important;
+list-style: none;
+padding: 0 !important;
+margin: 0;
+}</p>
+<p>.xr-dim-list li {
+display: inline-block;
+padding: 0;
+margin: 0;
+}</p>
+<p>.xr-dim-list:before {
+content: ‘(‘;
+}</p>
+<p>.xr-dim-list:after {
+content: ‘)’;
+}</p>
+<p>.xr-dim-list li:not(:last-child):after {
+content: ‘,’;
+padding-right: 5px;
+}</p>
+<p>.xr-has-index {
+font-weight: bold;
+}</p>
+<p>.xr-var-list,
+.xr-var-item {
+display: contents;
+}</p>
+<p>.xr-var-item &gt; div,
+.xr-var-item label,
+.xr-var-item &gt; .xr-var-name span {
+background-color: var(–xr-background-color-row-even);
+margin-bottom: 0;
+}</p>
+<p>.xr-var-item &gt; .xr-var-name:hover span {
+padding-right: 5px;
+}</p>
+<p>.xr-var-list &gt; li:nth-child(odd) &gt; div,
+.xr-var-list &gt; li:nth-child(odd) &gt; label,
+.xr-var-list &gt; li:nth-child(odd) &gt; .xr-var-name span {
+background-color: var(–xr-background-color-row-odd);
+}</p>
+<p>.xr-var-name {
+grid-column: 1;
+}</p>
+<p>.xr-var-dims {
+grid-column: 2;
+}</p>
+<p>.xr-var-dtype {
+grid-column: 3;
+text-align: right;
+color: var(–xr-font-color2);
+}</p>
+<p>.xr-var-preview {
+grid-column: 4;
+}</p>
+<p>.xr-index-preview {
+grid-column: 2 / 5;
+color: var(–xr-font-color2);
+}</p>
+<p>.xr-var-name,
+.xr-var-dims,
+.xr-var-dtype,
+.xr-preview,
+.xr-attrs dt {
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+padding-right: 10px;
+}</p>
+<p>.xr-var-name:hover,
+.xr-var-dims:hover,
+.xr-var-dtype:hover,
+.xr-attrs dt:hover {
+overflow: visible;
+width: auto;
+z-index: 1;
+}</p>
+<p>.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+display: none;
+background-color: var(–xr-background-color) !important;
+padding-bottom: 5px !important;
+}</p>
+<p>.xr-var-attrs-in:checked ~ .xr-var-attrs,
+.xr-var-data-in:checked ~ .xr-var-data,
+.xr-index-data-in:checked ~ .xr-index-data {
+display: block;
+}</p>
+<p>.xr-var-data &gt; table {
+float: right;
+}</p>
+<p>.xr-var-name span,
+.xr-var-data,
+.xr-index-name div,
+.xr-index-data,
+.xr-attrs {
+padding-left: 25px !important;
+}</p>
+<p>.xr-attrs,
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+grid-column: 1 / -1;
+}</p>
+<p>dl.xr-attrs {
+padding: 0;
+margin: 0;
+display: grid;
+grid-template-columns: 125px auto;
+}</p>
+<p>.xr-attrs dt,
+.xr-attrs dd {
+padding: 0;
+margin: 0;
+float: left;
+padding-right: 10px;
+width: auto;
+}</p>
+<p>.xr-attrs dt {
+font-weight: normal;
+grid-column: 1;
+}</p>
+<p>.xr-attrs dt:hover span {
+display: inline-block;
+background: var(–xr-background-color);
+padding-right: 10px;
+}</p>
+<p>.xr-attrs dd {
+grid-column: 2;
+white-space: pre-wrap;
+word-break: break-all;
+}</p>
+<p>.xr-icon-database,
+.xr-icon-file-text2,
+.xr-no-icon {
+display: inline-block;
+vertical-align: middle;
+width: 1em;
+height: 1.5em !important;
+stroke-width: 0;
+stroke: currentColor;
+fill: currentColor;
+}
+</style><pre class='xr-text-repr-fallback'>&lt;xarray.Dataset&gt;
+Dimensions:    (variable: 2, modelXY: 6561, x: 81, y: 81)
+Coordinates:</p>
+<ul>
+<li><p>variable   (variable) &lt;U1 ‘x’ ‘y’</p></li>
+<li><p>x          (modelXY) float64 -50.0 -50.0 -50.0 -50.0 … 50.0 50.0 50.0 50.0</p></li>
+<li><p>y          (modelXY) float64 -50.0 -48.75 -47.5 -46.25 … 47.5 48.75 50.0</p></li>
+<li><p>modelXY    (modelXY) object MultiIndex
+Data variables:
+modelGrid  (variable, x, y) float64 -50.0 -48.75 -47.5 … 50.0 50.0 50.0
+Attributes:
+description:  Model grid for TDSI solution
+unit:         m
+nx:           81
+ny:           81</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-7383e080-831f-4101-b3e6-44a58ef594bd' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-7383e080-831f-4101-b3e6-44a58ef594bd' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>variable</span>: 2</li><li><span class='xr-has-index'>modelXY</span>: 6561</li><li><span>x</span>: 81</li><li><span>y</span>: 81</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-1127c03e-c3d9-46ce-bb8f-ca4b97914a14' class='xr-section-summary-in' type='checkbox'  checked><label for='section-1127c03e-c3d9-46ce-bb8f-ca4b97914a14' class='xr-section-summary' >Coordinates: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>variable</span></div><div class='xr-var-dims'>(variable)</div><div class='xr-var-dtype'>&lt;U1</div><div class='xr-var-preview xr-preview'>’x’ ‘y’</div><input id='attrs-27caba00-869c-499b-940a-b62e63f7b6ba' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-27caba00-869c-499b-940a-b62e63f7b6ba' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-684ece52-d1bb-4957-b926-2783980adf64' class='xr-var-data-in' type='checkbox'><label for='data-684ece52-d1bb-4957-b926-2783980adf64' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([‘x’, ‘y’], dtype=’&lt;U1’)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>x</span></div><div class='xr-var-dims'>(modelXY)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-50.0 -50.0 -50.0 … 50.0 50.0</div><input id='attrs-955d7487-0e5b-4f0a-ad28-b0d42e9bb28e' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-955d7487-0e5b-4f0a-ad28-b0d42e9bb28e' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-dc921a51-f763-4760-9d87-ba4df51950c3' class='xr-var-data-in' type='checkbox'><label for='data-dc921a51-f763-4760-9d87-ba4df51950c3' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([-50., -50., -50., …,  50.,  50.,  50.])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>y</span></div><div class='xr-var-dims'>(modelXY)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-50.0 -48.75 -47.5 … 48.75 50.0</div><input id='attrs-d070e0e9-715e-4123-bcd2-dbcc1fef15c5' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-d070e0e9-715e-4123-bcd2-dbcc1fef15c5' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-f8cf2b7e-c27d-47b7-aaad-dfe55f0a158f' class='xr-var-data-in' type='checkbox'><label for='data-f8cf2b7e-c27d-47b7-aaad-dfe55f0a158f' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([-50.  , -48.75, -47.5 , …,  47.5 ,  48.75,  50.  ])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>modelXY</span></div><div class='xr-var-dims'>(modelXY)</div><div class='xr-var-dtype'>object</div><div class='xr-var-preview xr-preview'>MultiIndex</div><input id='attrs-3676d8f3-eec0-4372-a5d7-41d3126d4d2f' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-3676d8f3-eec0-4372-a5d7-41d3126d4d2f' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-7f62055a-9e50-443c-8794-7c609957e6d8' class='xr-var-data-in' type='checkbox'><label for='data-7f62055a-9e50-443c-8794-7c609957e6d8' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([(-50.0, -50.0), (-50.0, -48.75), (-50.0, -47.5), …, (50.0, 47.5),
+(50.0, 48.75), (50.0, 50.0)], dtype=object)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-c5ec8248-e55b-49e7-86b1-6905b4fbe45b' class='xr-section-summary-in' type='checkbox'  checked><label for='section-c5ec8248-e55b-49e7-86b1-6905b4fbe45b' class='xr-section-summary' >Data variables: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>modelGrid</span></div><div class='xr-var-dims'>(variable, x, y)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-50.0 -48.75 -47.5 … 50.0 50.0</div><input id='attrs-4b812753-2b83-4b9d-afa9-776f17c2b837' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-4b812753-2b83-4b9d-afa9-776f17c2b837' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-236f575c-c4e2-4600-8759-11d3a0b6d6f9' class='xr-var-data-in' type='checkbox'><label for='data-236f575c-c4e2-4600-8759-11d3a0b6d6f9' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[[-50.  , -48.75, -47.5 , …,  47.5 ,  48.75,  50.  ],
+[-50.  , -48.75, -47.5 , …,  47.5 ,  48.75,  50.  ],
+[-50.  , -48.75, -47.5 , …,  47.5 ,  48.75,  50.  ],
+…,
+[-50.  , -48.75, -47.5 , …,  47.5 ,  48.75,  50.  ],
+[-50.  , -48.75, -47.5 , …,  47.5 ,  48.75,  50.  ],
+[-50.  , -48.75, -47.5 , …,  47.5 ,  48.75,  50.  ]],</p>
+<p>[[-50.  , -50.  , -50.  , …, -50.  , -50.  , -50.  ],
+[-48.75, -48.75, -48.75, …, -48.75, -48.75, -48.75],
+[-47.5 , -47.5 , -47.5 , …, -47.5 , -47.5 , -47.5 ],
+…,
+[ 47.5 ,  47.5 ,  47.5 , …,  47.5 ,  47.5 ,  47.5 ],
+[ 48.75,  48.75,  48.75, …,  48.75,  48.75,  48.75],
+[ 50.  ,  50.  ,  50.  , …,  50.  ,  50.  ,  50.  ]]])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-93b0aa58-a042-42f5-add2-0892ca609771' class='xr-section-summary-in' type='checkbox'  ><label for='section-93b0aa58-a042-42f5-add2-0892ca609771' class='xr-section-summary' >Indexes: <span>(2)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>variable</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-548b5729-b74c-40a7-9c2b-5baa610a3910' class='xr-index-data-in' type='checkbox'/><label for='index-548b5729-b74c-40a7-9c2b-5baa610a3910' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([‘x’, ‘y’], dtype=’object’, name=’variable’))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>x<br>y<br>modelXY</div></div><div class='xr-index-preview'>PandasMultiIndex</div><div></div><input id='index-daa9e8e7-565f-458d-9e04-2ee06b2d66c7' class='xr-index-data-in' type='checkbox'/><label for='index-daa9e8e7-565f-458d-9e04-2ee06b2d66c7' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(MultiIndex([(-50.0,  -50.0),
+(-50.0, -48.75),
+(-50.0,  -47.5),
+(-50.0, -46.25),
+(-50.0,  -45.0),
+(-50.0, -43.75),
+(-50.0,  -42.5),
+(-50.0, -41.25),
+(-50.0,  -40.0),
+(-50.0, -38.75),
+…
+( 50.0,  38.75),
+( 50.0,   40.0),
+( 50.0,  41.25),
+( 50.0,   42.5),
+( 50.0,  43.75),
+( 50.0,   45.0),
+( 50.0,  46.25),
+( 50.0,   47.5),
+( 50.0,  48.75),
+( 50.0,   50.0)],
+name=’modelXY’, length=6561))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-b9f33c58-4093-4660-bf22-ec3a1a0cd6b4' class='xr-section-summary-in' type='checkbox'  checked><label for='section-b9f33c58-4093-4660-bf22-ec3a1a0cd6b4' class='xr-section-summary' >Attributes: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>description :</span></dt><dd>Model grid for TDSI solution</dd><dt><span>unit :</span></dt><dd>m</dd><dt><span>nx :</span></dt><dd>81</dd><dt><span>ny :</span></dt><dd>81</dd></dl></div></li></ul></div></div></p>
+</li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./contents/06_LES_virtualArray_20240419"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../05_TDSI_20240416/05_TDSI_20240416.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Time-Dependent Stochastic Inversion</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../../autoapi/atom/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">atom</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-the-model-grid">Build the model grid</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimal-data-vector">Optimal data vector</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Nicholas Hamilton
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
