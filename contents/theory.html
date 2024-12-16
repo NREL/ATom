@@ -590,14 +590,14 @@ $<span class="math notranslate nohighlight">\(
 <p>where the superscript <span class="math notranslate nohighlight">\(S\)</span> implies that the covariance function is now purely spatial, and all time dependence of the function has been removed.</p>
 <p>Finally, to describe the spatial covariance of the temperature and wind velocity fields within the tomographic area, the following Gaussian covariance functions were used:</p>
 <div class="math notranslate nohighlight">
-\[
+\[\begin{split}
 \begin{aligned}
-    B^S_{TT} &amp;= \sigma_T^2 \text{exp}\left( -\frac{(\mathbf{r} - \mathbf{r}^\prime)^2}{l_T^2}\right)
-    B^S_{uu} &amp;= \sigma_u^2 \text{exp}\left( -\frac{(\mathbf{r} - \mathbf{r}^\prime)^2}{l^2}\right) \left( 1 - \frac{(y - y^\prime)^2}{l^2} \right)
-    B^S_{vv} &amp;= \sigma_v^2 \text{exp}\left( -\frac{(\mathbf{r} - \mathbf{r}^\prime)^2}{l^2}\right)\left( 1 - \frac{(x - x^\prime)^2}{l^2} \right)
-    B^S_{uv} &amp;= \sigma_u \sigma_v \text{exp}\left( -\frac{(\mathbf{r} - \mathbf{r}^\prime)^2}{l^2}\right) \left( \frac{(x - x^\prime)(y - y^\prime)}{l^2} \right)
+    B^S_{TT} &amp;= \sigma_T^2 \text{exp}\left( -\frac{(\mathbf{r} - \mathbf{r}^\prime)^2}{l_T^2}\right)\\
+    B^S_{uu} &amp;= \sigma_u^2 \text{exp}\left( -\frac{(\mathbf{r} - \mathbf{r}^\prime)^2}{l^2}\right) \left( 1 - \frac{(y - y^\prime)^2}{l^2} \right)\\
+    B^S_{vv} &amp;= \sigma_v^2 \text{exp}\left( -\frac{(\mathbf{r} - \mathbf{r}^\prime)^2}{l^2}\right)\left( 1 - \frac{(x - x^\prime)^2}{l^2} \right)\\
+    B^S_{uv} &amp;= \sigma_u \sigma_v \text{exp}\left( -\frac{(\mathbf{r} - \mathbf{r}^\prime)^2}{l^2}\right) \left( \frac{(x - x^\prime)(y - y^\prime)}{l^2} \right)\\
 \end{aligned}
-\]</div>
+\end{split}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\sigma_T\)</span>, <span class="math notranslate nohighlight">\(\sigma_u\)</span>, and <span class="math notranslate nohighlight">\(\sigma_v\)</span> are the standard deviations of the corresponding fields, <span class="math notranslate nohighlight">\(l_T\)</span> and <span class="math notranslate nohighlight">\(l\)</span> are correlation lengths of temperature and velocity, and the vectors <span class="math notranslate nohighlight">\(\mathbf{r} = (x,y)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{r}^\prime = (x^\prime,y^\prime)\)</span>.
 With the correlation functions in Equations~\eqref{eq:corr1} and \eqref{eq:corr2}, one can estimate the covariance matrices <span class="math notranslate nohighlight">\(\mathbf{R}_{\mathbf{md}_0}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{R}_{\mathbf{d}_0\mathbf{d}_0}\)</span>, and finally the coefficient matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> using Equation~\eqref{eq:Amatrix}.
 In the described TDSI algorithm, five parameters must be chosen or deduced: <span class="math notranslate nohighlight">\(\sigma_T\)</span>, <span class="math notranslate nohighlight">\(\sigma_u\)</span>, <span class="math notranslate nohighlight">\(\sigma_v\)</span>, <span class="math notranslate nohighlight">\(l_T\)</span>, and <span class="math notranslate nohighlight">\(l\)</span>.
