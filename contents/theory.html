@@ -1,0 +1,731 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Theory &#8212; Acoustic Travel Time Tomography</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'contents/theory';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="The atom Signal Processing Module" href="01_SignalProcessingModule_20240410/01_SignalProcessingModule_20240410.html" />
+    <link rel="prev" title="Installation" href="../gettingStarted.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Acoustic Travel Time Tomography</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Introduction to Acoustic Travel Time Tomography
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../gettingStarted.html">Installation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Theory Reference</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Theory</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Walkthrough</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_SignalProcessingModule_20240410/01_SignalProcessingModule_20240410.html">The <code class="docutils literal notranslate"><span class="pre">atom</span></code> Signal Processing Module</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="02_travelTimeExtractor_20240411/02_travelTimeExtractor_20240411.html">Travel Time Extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02a_travelTimeDebug_20240104/02a_travelTimeDebug_20240104.html">Travel time measurement review, validation, and bias estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_bulkFieldEstimation_20240412/03_bulkFieldEstimation_20240412.html">The <code class="docutils literal notranslate"><span class="pre">atom.backgroundFlow</span></code> module</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="03a_sonic_v_array_20230110/03a_sonic_v_array_20230110.html">Bulk flow validation against sonic anemometer</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="04_modelGrid_and_covarianceMatrix_20240416/04_modelGrid_and_covarianceMatrix_20240416.html">Covariance Matrices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_TDSI_20240416/05_TDSI_20240416.html">Time-Dependent Stochastic Inversion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_LES_virtualArray_20240419/06_LES_virtualArray_20240419.html">Virtual Acoustic Tomography Array</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../autoapi/atom/index.html">atom</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../autoapi/atom/backgroundFlow/index.html">atom.backgroundFlow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/atom/backgroundFlow/flowModel/index.html">atom.backgroundFlow.flowModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/atom/backgroundFlow/linearsystem/index.html">atom.backgroundFlow.linearsystem</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../autoapi/atom/fluctuatingField/index.html">atom.fluctuatingField</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/atom/fluctuatingField/covarinceMatix/index.html">atom.fluctuatingField.covarinceMatix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/atom/fluctuatingField/modelGrid/index.html">atom.fluctuatingField.modelGrid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/atom/fluctuatingField/pathSetup/index.html">atom.fluctuatingField.pathSetup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/atom/fluctuatingField/timeDependentStochasticInversion/index.html">atom.fluctuatingField.timeDependentStochasticInversion</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../autoapi/atom/signalProc/index.html">atom.signalProc</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/atom/signalProc/atarray/index.html">atom.signalProc.atarray</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/atom/signalProc/audiodata/index.html">atom.signalProc.audiodata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/atom/signalProc/auxdata/index.html">atom.signalProc.auxdata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/atom/signalProc/constants/index.html">atom.signalProc.constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/atom/signalProc/traveltimeextractor/index.html">atom.signalProc.traveltimeextractor</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../autoapi/atom/simulation/index.html">atom.simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/atom/simulation/les/index.html">atom.simulation.les</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/atom/utils/index.html">atom.utils</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fcontents/theory.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/contents/theory.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Theory</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-field-estimation">Mean Field Estimation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-dependent-stochastic-inversion">Time-Dependent Stochastic Inversion</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="theory">
+<h1>Theory<a class="headerlink" href="#theory" title="Link to this heading">#</a></h1>
+<p>The basis of acoustic tomography explored here follows the formulation provided in \citet{Vecherin2006}. The theory builds from an assumption that the travel time (<span class="math notranslate nohighlight">\(t_i\)</span>) of any acoustic signal through the atmosphere depends only on the length of the path traversed along the <span class="math notranslate nohighlight">\(i\)</span>\textsuperscript{th} ray and the group velocity of the acoustic signal, <span class="math notranslate nohighlight">\(u_i\)</span>, which is the sum of the local speed of sound and the projection of the ambient convection velocity onto the unit vector aligned with the path <span class="math notranslate nohighlight">\(\mathbf{r}_i\)</span>.</p>
+<p>The travel time, <span class="math notranslate nohighlight">\(t_i\)</span>, along any signal path, <span class="math notranslate nohighlight">\(L_i\)</span>, can be expressed.</p>
+<div class="math notranslate nohighlight">
+\[
+    t_i = \int_{L_i} \frac{1}{u_i (\mathbf{r}_i)} dl
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(i=1,...,I\)</span> represents the index of the path and <span class="math notranslate nohighlight">\(I\)</span> is the total number of travel paths considered (<span class="math notranslate nohighlight">\(I=64\)</span> for the current application).</p>
+<p>The local speed of sound is typically taken as the Laplace adiabatic sound speed, <span class="math notranslate nohighlight">\(c_L\)</span>, which is related to the acoustic virtual temperature, <span class="math notranslate nohighlight">\(T_{av}\)</span>,
+$<span class="math notranslate nohighlight">\(
+    c_L = \sqrt{\gamma R_a T_\text{av}}
+\)</span>$</p>
+<p>where <span class="math notranslate nohighlight">\(\gamma \approx 1.41\)</span> is the ratio of specific heats and <span class="math notranslate nohighlight">\(R_a=287.058\)</span> is the universal gas constant for dry air.</p>
+<p>Decomposing the instantaneous fields of the speed of sound, temperature, and ambient atmospheric horizontal velocity components (<span class="math notranslate nohighlight">\(c_L\)</span>, <span class="math notranslate nohighlight">\(T_{av}\)</span>, <span class="math notranslate nohighlight">\(\tilde{u}\)</span>, and <span class="math notranslate nohighlight">\(\tilde{v}\)</span>, respectively) into spatially averaged values (denoted with the 0 subscript) and spatially heterogeneous fluctuations (<span class="math notranslate nohighlight">\(c, T, u, v = f(\mathbf{r},t)\)</span>) yields</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+    c_L(\mathbf{r}, t) &amp;= c_0(t) + c(\mathbf{r}, t) \nonumber\\
+    T_\text{av}(\mathbf{r}, t) &amp;= T_0(t) + T(\mathbf{r}, t) \nonumber\\
+    \tilde{u}(\mathbf{r}, t) &amp;= u_0(t) + u(\mathbf{r}, t) \nonumber\\
+    \tilde{v}(\mathbf{r}, t) &amp;= v_0(t) + v(\mathbf{r}, t).
+\end{aligned}
+\end{split}\]</div>
+<p>Here, <span class="math notranslate nohighlight">\(\tilde{u}(\mathbf{r}, t\)</span>) and <span class="math notranslate nohighlight">\(\tilde{v}(\mathbf{r}, t\)</span>) are the components of the two-dimensional velocity vector and <span class="math notranslate nohighlight">\(\mathbf{r}\)</span> represents the Cartesian coordinates of the locations within the tomographic area.</p>
+<p>The linearized expression for travel time of an acoustic emission is</p>
+<div class="math notranslate nohighlight">
+\[
+    t_i = \epsilon_i(t_0) + \frac{L_i}{c_0(t)} \left( 1 - \frac{u_0(t) \text{cos}~\phi_i + v_0(t) \text{sin}~\phi_i}{c_0(t)} \right) - \frac{1}{c_0^2(t)} \int_{L_i} \frac{c_0(t)}{2T_0(t)} T(\mathbf{r}, t)+ u(\mathbf{r}, t) \text{cos}~\phi_i + v(\mathbf{r}, t)\text{sin}~\phi_i ~dl,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\epsilon_i(t_0)\)</span> is the noise in the travel time and <span class="math notranslate nohighlight">\(\phi_i\)</span> is the angle between the <span class="math notranslate nohighlight">\(i^\text{th}\)</span> ray and the positive <span class="math notranslate nohighlight">\(x\)</span> axis.</p>
+<section id="mean-field-estimation">
+<h2>Mean Field Estimation<a class="headerlink" href="#mean-field-estimation" title="Link to this heading">#</a></h2>
+<p>Estimates of the mean (spatially averaged) temperature and in-plane components of velocity (<span class="math notranslate nohighlight">\(T_0\)</span>, <span class="math notranslate nohighlight">\(u_0\)</span>, and <span class="math notranslate nohighlight">\(v_0\)</span>) are achieved by assuming a spatially homogeneous field.
+With this assumption, Equation~\eqref{eq:tt_exp} reduces to</p>
+<div class="math notranslate nohighlight">
+\[
+    t_i = \frac{L_i}{c_0(t)} \left( 1 - \frac{u_0(t) \text{cos}~\phi_i + v_0(t) \text{sin}~\phi_i}{c_0(t)} \right)% - \frac{1}{c_0^2(t)}
+\]</div>
+<p>Equation~\eqref{eq:meanfield} can then be rewritten in matrix form:</p>
+<div class="math notranslate nohighlight">
+\[
+    \mathbf{Gf} = \mathbf{b}
+\]</div>
+<p>where the elements of the column vector <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> are known and are given by <span class="math notranslate nohighlight">\(b_i=t_i(t)/L_i\)</span>. The vector of unknown values has three elements, <span class="math notranslate nohighlight">\(\mathbf{f} = [1/c_0(t), u_0(t)/c_0^2(t), v_0(t)/c_0^2(t)]\)</span>, and the matrix <span class="math notranslate nohighlight">\(\mathbf{G}\)</span> is a function of the orientation of each path vector with respect to the positive <span class="math notranslate nohighlight">\(x\)</span>-axis, oriented east-west in the current AT array:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \mathbf{G} = \begin{bmatrix}
+        1 &amp; -\text{cos}~\phi_1 &amp; -\text{sin}~\phi_1 \\
+        \vdots &amp; \vdots &amp; \vdots \\
+        1 &amp; -\text{cos}~\phi_I &amp; -\text{sin}~\phi_I
+    \end{bmatrix}
+\end{split}\]</div>
+<p>The observed travel times of acoustic chirps along the paths <span class="math notranslate nohighlight">\(r_i\)</span> provide an overdetermined linear system for the spatially averaged speed of sound and convective velocity.
+Least-squares estimation resolves the components of <span class="math notranslate nohighlight">\(\mathbf{f}\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[
+    \mathbf{f} = (\mathbf{G}^T\mathbf{G})^{-1} \mathbf{G}^T\mathbf{b}
+\]</div>
+<p>resulting in estimates of <span class="math notranslate nohighlight">\(c_0(t)\)</span>, <span class="math notranslate nohighlight">\(u_0(t)\)</span>, and <span class="math notranslate nohighlight">\(v_0(t)\)</span> at the temporal resolution of frame collection by the AT system—in this case, 2 hertz (Hz).</p>
+</section>
+<section id="time-dependent-stochastic-inversion">
+<h2>Time-Dependent Stochastic Inversion<a class="headerlink" href="#time-dependent-stochastic-inversion" title="Link to this heading">#</a></h2>
+<p>Once the spatial mean values of temperature, adiabatic sound speed, and wind velocity fields within a tomographic area are known, the column vector of data <span class="math notranslate nohighlight">\(d(t)\)</span> obtained at time <span class="math notranslate nohighlight">\(t\)</span> with elements is introduced as</p>
+<div class="math notranslate nohighlight">
+\[
+    d_i(t) = L_i [ c_0(t) - u_0(t) \text{cos}~\phi_i - v_0(t) \text{sin}~\phi_i] - c_0^2(t)t_i(t) + \xi_i(t)
+\]</div>
+<p>where the noise term <span class="math notranslate nohighlight">\(\xi_i(t)\)</span> includes errors in travel time measurement <span class="math notranslate nohighlight">\(\epsilon_i(t)\)</span> and errors in estimation of the associated spatially averaged temperature and velocity.
+Using Equation~\eqref{eq:tt_exp}, the data vector can be expressed as <span class="math notranslate nohighlight">\(\mathbf{d}(t) = \mathbf{d}_0(t) + \mathbf{\xi}(t)\)</span>, where <span class="math notranslate nohighlight">\( \mathbf{d}_0(t)\)</span> is a vector of noise-free data expressed as</p>
+<div class="math notranslate nohighlight">
+\[
+    d_{0i}(t) = \int_{L_i} \left( \frac{c_0(t)}{2T_0(t)}T(\mathbf{r},t) + u(\mathbf{r},t)\text{cos}~\phi_i + v(\mathbf{r},t)\text{sin}~\phi_i \right) dl.
+\]</div>
+<p>The central problem of time-dependent stochastic inversion is to reconstruct the fluctuating fields of temperature and velocity, <span class="math notranslate nohighlight">\(T(\mathbf{r},t_0)\)</span>, <span class="math notranslate nohighlight">\(u(\mathbf{r},t_0)\)</span>, and <span class="math notranslate nohighlight">\(v(\mathbf{r},t_0)\)</span>, at a time <span class="math notranslate nohighlight">\(t_0\)</span> with knowledge of the acoustic travel time and the spatial average temperature and velocity.
+This is undertaken through the introduction of a vector of models (<span class="math notranslate nohighlight">\(\mathbf{m}\)</span>) for temperature and velocity at all measurement times along all paths:</p>
+<div class="math notranslate nohighlight">
+\[
+    \mathbf{m}(t_0) = \left[ T(\mathbf{r}_1, t_0)~;~ \dots ~;~  T(\mathbf{r}_J, t_0)~;~ u(\mathbf{r}_1, t_0)~;~ \dots ~;~  u(\mathbf{r}_J, t_0)~;~ v(\mathbf{r}_1, t_0)~;~ \dots ~;~  v(\mathbf{r}_J, t_0) \right],
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(J\)</span> is the number of spatial locations within the domain to be resolved.
+Assuming that one can collect data <span class="math notranslate nohighlight">\(N+1\)</span> times during a time interval with duration <span class="math notranslate nohighlight">\(\tau\)</span>, denoted as <span class="math notranslate nohighlight">\(N_\tau\)</span>, by emitting and detecting chirps within the tomographic area, one can form the vector <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> for each frame</p>
+<div class="math notranslate nohighlight">
+\[
+    \mathbf{d} = \left[ \mathbf{d}(t - N \tau)~;~ \mathbf{d}(t - N \tau+\tau)~;~\dots ~;~ \mathbf{d}(t) \right].
+\]</div>
+<p>Here, <span class="math notranslate nohighlight">\(\mathbf{d}\)</span> is a vector containing <span class="math notranslate nohighlight">\((N+1)\)</span> column vectors <span class="math notranslate nohighlight">\(\mathbf{d}(t-n\tau)\)</span>, each of length <span class="math notranslate nohighlight">\(I\)</span>, and <span class="math notranslate nohighlight">\(n=0,1...,N\)</span>. <span class="math notranslate nohighlight">\(\tau\)</span> represents equal time intervals at which data is collected.</p>
+<p>Using the data vectors from Equation~\eqref{eq:datavec}, it is necessary to find a linear estimate <span class="math notranslate nohighlight">\(\hat{\mathbf{m}}(t_0)\)</span> of the unknown models <span class="math notranslate nohighlight">\(\mathbf{m}(t_0)\)</span> at each time <span class="math notranslate nohighlight">\(t_0\)</span>.
+Models are formed using observed travel times ahead of (<span class="math notranslate nohighlight">\(t_0 &gt; t\)</span>), concurrent with (<span class="math notranslate nohighlight">\(t_0 = t\)</span>), or following (<span class="math notranslate nohighlight">\(t_0 &lt; t\)</span>) any time of interest, <span class="math notranslate nohighlight">\(t_0\)</span>.
+In the current formulation, models are sought as linearizations of the observed data:</p>
+<div class="math notranslate nohighlight">
+\[
+    \hat{\mathbf{m}}(t_0) = \mathbf{Ad},
+\]</div>
+<p>where the elements of matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> are unknown and must be estimated. Matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> contains linear coefficients <span class="math notranslate nohighlight">\(a_{jk}\)</span>, where <span class="math notranslate nohighlight">\(j=1,2,\dots,3J\)</span> and <span class="math notranslate nohighlight">\(k = 1,2,\dots,(N+1)I\)</span>.
+Discrepancies <span class="math notranslate nohighlight">\(\mathbf{\varepsilon}\)</span> between the true and reconstructed temperature and velocity fields at time <span class="math notranslate nohighlight">\(t_0\)</span> are written as</p>
+<div class="math notranslate nohighlight">
+\[
+    \mathbf{\varepsilon}_j =  \hat{\mathbf{m}}_j(t_0) - \mathbf{m}_j(t_0).
+\]</div>
+<p>Elements of the coefficient matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> are chosen to minimize discrepancies <span class="math notranslate nohighlight">\(\mathbf{\varepsilon}_j\)</span> in a mean-squared sense.</p>
+<p>The matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> that solves the problem does not depend on a particular structure of the models <span class="math notranslate nohighlight">\(\mathbf{m}\)</span> and data <span class="math notranslate nohighlight">\(\mathbf{d}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+    \mathbf{A} = \mathbf{R}_{\mathbf{md}} \mathbf{R}_{\mathbf{dd}}^{-1},
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{R}_{\mathbf{md}}\)</span>  and <span class="math notranslate nohighlight">\(\mathbf{R}_{\mathbf{dd}}\)</span> are model-data and data-data covariance matrices.
+Since data and models have been chosen, covariance matrices have the following structure:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+    \mathbf{R}_{\mathbf{md}} &amp;=&amp;  \left[ \mathbf{B}_{\mathbf{m}\mathbf{d}}(t_0, t-N\tau) , ~ \mathbf{B}_{\mathbf{m}\mathbf{d}}(t_0, t-N\tau + \tau),~\dots, ~ \mathbf{B}_{\mathbf{m}\mathbf{d}}(t_0, t) \right]\\
+    \mathbf{R}_{\mathbf{dd}} &amp;=&amp;  \begin{bmatrix}
+        \mathbf{B}_{\mathbf{dd}}(t - N\tau, t-N\tau) &amp; \mathbf{B}_{\mathbf{dd}}(t - N\tau, t-N\tau + \tau) &amp; \dots &amp; \mathbf{B}_{\mathbf{dd}}(t - N\tau, t) \\
+        \mathbf{B}_{\mathbf{dd}}(t - N\tau+\tau, t-N\tau) &amp; \mathbf{B}_{\mathbf{dd}}(t - N\tau+\tau, t-N\tau + \tau) &amp; \dots &amp; \mathbf{B}_{\mathbf{dd}}(t - N\tau+\tau, t) \\
+        \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\    
+        \mathbf{B}_{\mathbf{dd}}(t, t-N\tau) &amp; \mathbf{B}_{\mathbf{dd}}(t, t-N\tau + \tau) &amp; \dots &amp; \mathbf{B}_{\mathbf{dd}}(t, t)
+    \end{bmatrix}
+\end{aligned}
+\end{split}\]</div>
+<p>Here, <span class="math notranslate nohighlight">\(\mathbf{B}_{\mathbf{md}}(t_1, t_2) = \langle \mathbf{m}(t_1) \mathbf{d}^T(t_2)\rangle\)</span> is a covariance matrix of size <span class="math notranslate nohighlight">\([3J,I]\)</span> between the models at time <span class="math notranslate nohighlight">\(t_1\)</span> and the data at time <span class="math notranslate nohighlight">\(t_2\)</span>.
+Similarly, <span class="math notranslate nohighlight">\(\mathbf{B}_{\mathbf{dd}}(t_1, t_2) = \langle \mathbf{d}(t_1) \mathbf{d}^T(t_2)\rangle\)</span> is the covariance matrix of size <span class="math notranslate nohighlight">\([I,I]\)</span> between the data at times <span class="math notranslate nohighlight">\(t_1\)</span> and <span class="math notranslate nohighlight">\(t_2\)</span>.
+Note that the matrix <span class="math notranslate nohighlight">\(R_{\mathbf{dd}}\)</span> is symmetric by definition.
+It is further possible to quantify error in the field reconstruction process directly as</p>
+<div class="math notranslate nohighlight">
+\[
+    \mathbf{R_{\epsilon\epsilon}} = \mathbf{R}_{\mathbf{mm}} - \mathbf{R}_{\mathbf{md}}\mathbf{R}_{\mathbf{dd}}^{-1}\mathbf{R}_{\mathbf{md}}^T,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{R}_{\mathbf{mm}} = \langle \mathbf{m}(t_0) \mathbf{m}^T(t_0)\rangle\)</span> represents the covariance of the models at time <span class="math notranslate nohighlight">\(t_0\)</span>.</p>
+<p>Since the optimal stochastic inverse operator <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> given by
+Equation~\eqref{eq:Amatrix} is determined in terms of the matrices <span class="math notranslate nohighlight">\(\mathbf{R}_{\mathbf{md}}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{R}_{\mathbf{dd}}\)</span>, the formulation of each covariance matrix determines the fidelity and accuracy of the reconstructed temperature and velocity fields.
+In the case of travel-time tomography, one can use the linear relationship expressed in Equation~\eqref{eq:data} to derive expressions for the covariance matrix <span class="math notranslate nohighlight">\(\mathbf{B}_{\mathbf{m}\mathbf{d}_0}(t_1, t_2)\)</span> between the models at time <span class="math notranslate nohighlight">\(t_1\)</span> and the noise-free data at time <span class="math notranslate nohighlight">\(t_2\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}    
+    \mathbf{B}_{\mathbf{m}_j\mathbf{d}_{0i}}(t_1, t_2) &amp;=&amp; \langle m_j(t_1) d_{0i}(t_2) \rangle\\
+    &amp;=&amp; \int_{L_i} \left( \frac{c_0(t_2)}{2T_0(t_2)} \langle m_j(t_1) T(\mathbf{r},t_2) \rangle + \langle m_j(t_1) u(\mathbf{r},t_2)\rangle \text{cos}~\phi_i + \langle m_j(t_1) v(\mathbf{r},t_2)\rangle \text{sin}~\phi_i \right) dl\\
+    &amp;=&amp; \begin{cases}
+        \int_{L_i} \left( \frac{c_0(t_2)}{2T_0(t_2)}B_{TT}(\mathbf{r}_j, t_1; \mathbf{r}, t_2) \right) dl, &amp; \text{if } 1 \le j \le J \\
+        \int_{L_i} \left(B_{uu}(\mathbf{r}_j, t_1; \mathbf{r}, t_2) \text{cos}~\phi_i + B_{uv}(\mathbf{r}_j, t_1; \mathbf{r}, t_2) \text{sin}~\phi_i \right) dl, &amp; \text{if } J+1 \le j \le 2J \\
+        \int_{L_i} \left(B_{vu}(\mathbf{r}_j, t_1; \mathbf{r}, t_2) \text{cos}~\phi_i + B_{vv}(\mathbf{r}_j, t_1; \mathbf{r}, t_2) \text{sin}~\phi_i \right) dl, &amp; \text{if } 2J+1 \le j \le 3J
+  \end{cases}
+\end{aligned}
+\end{split}\]</div>
+<p>Note that the index <span class="math notranslate nohighlight">\(j\)</span> indicates which field (either temperature, <span class="math notranslate nohighlight">\(T\)</span>, <span class="math notranslate nohighlight">\(x\)</span>-velocity, <span class="math notranslate nohighlight">\(u\)</span>, or <span class="math notranslate nohighlight">\(y\)</span>-velocity, <span class="math notranslate nohighlight">\(v\)</span>) is being considered, and that there are <span class="math notranslate nohighlight">\(J\)</span> instances of each respective model.
+Indices <span class="math notranslate nohighlight">\(i = 1,\dots,I\)</span> indicate the index of the path being considered and <span class="math notranslate nohighlight">\(\mathbf{r} \in L_i\)</span> are the path vectors.
+Spatial-temporal covariance functions of the corresponding fields are denoted <span class="math notranslate nohighlight">\(B_{TT}\)</span>, <span class="math notranslate nohighlight">\(B_{uu}\)</span>, <span class="math notranslate nohighlight">\(B_{uv}\)</span>, <span class="math notranslate nohighlight">\(B_{vu}\)</span>, and <span class="math notranslate nohighlight">\(B_{vv}\)</span>, and <span class="math notranslate nohighlight">\(\mathbf{r}_j\)</span> are the chosen spatial points within the tomographic area for which the sought fields are reconstructed.</p>
+<p>Similarly, the covariance matrix <span class="math notranslate nohighlight">\(\mathbf{B}_{\mathbf{d}_0\mathbf{d}_0}(t_1, t_2)\)</span> between the noise-free data at two times is provided by the expression</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \begin{aligned}
+    \mathbf{B}_{\mathbf{d}_{0i}\mathbf{d}_{0p}}(t_1, t_2) = &amp; \iint_{L_i, L_p} \frac{c_0(t_1)c_0(t_2)}{4T_0(t_1)T_0(t_2)} B_{TT}(\mathbf{r}, t_1; \mathbf{r}^\prime, t_2) + B_{uu}(\mathbf{r}, t_1; \mathbf{r}^\prime, t_2) \text{cos}~\phi_i ~ \text{cos}~\phi_p + \\
+    &amp; B_{vv}(\mathbf{r}, t_1; \mathbf{r}^\prime, t_2) \text{sin}~\phi_i ~ \text{sin}~\phi_p + 
+    B_{uv}(\mathbf{r}, t_1; \mathbf{r}^\prime, t_2) \text{cos}~\phi_i ~ \text{sin}~\phi_p + 
+    B_{vu}(\mathbf{r}, t_1; \mathbf{r}^\prime, t_2) \text{sin}~\phi_i ~ \text{cos}~\phi_p  ~ dl~dl^\prime,
+    \end{aligned}
+\end{split}\]</div>
+<p>where indices <span class="math notranslate nohighlight">\(i,p = 1,\dots,I\)</span> both indicate which paths are being considered and <span class="math notranslate nohighlight">\(\mathbf{r} \in L_i, \mathbf{r}^\prime \in L_p\)</span> are the path vectors.
+Note that it is assumed that the covariance functions between the temperature and either component of velocity <span class="math notranslate nohighlight">\(B_{Tu}=B_{Tv}=0\)</span>.</p>
+<p>With a further assumption that the fluctuating temperature and velocity are stationary, the covariance fields lose their explicit dependence on either of the times being considered, and instead rely only on the time separation</p>
+<div class="math notranslate nohighlight">
+\[
+    B(\mathbf{r}, t_1; \mathbf{r}^\prime, t_2) \Rightarrow B(\mathbf{r}, \mathbf{r}^\prime, \Delta t), \hspace{1cm} \Delta t = t_2 - t_1.\]</div>
+<p>Employing Taylor’s frozen field hypothesis, one can assume that the fluctuating field does not evolve in time but is simply convected along the main flow direction at some advection velocity <span class="math notranslate nohighlight">\(\mathbf{U}\)</span>.
+Thus the formulation of the covariance functions may be further simplified as
+$<span class="math notranslate nohighlight">\(
+    B(\mathbf{r}, \mathbf{r}^\prime, \Delta t) \Rightarrow B^S(\mathbf{r}, \mathbf{r}^\prime - \mathbf{U} \Delta t),
+\)</span>$</p>
+<p>where the superscript <span class="math notranslate nohighlight">\(S\)</span> implies that the covariance function is now purely spatial, and all time dependence of the function has been removed.</p>
+<p>Finally, to describe the spatial covariance of the temperature and wind velocity fields within the tomographic area, the following Gaussian covariance functions were used:</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{aligned}
+    B^S_{TT} &amp;= \sigma_T^2 \text{exp}\left( -\frac{(\mathbf{r} - \mathbf{r}^\prime)^2}{l_T^2}\right
+    B^S_{uu} &amp;= \sigma_u^2 \text{exp}\left( -\frac{(\mathbf{r} - \mathbf{r}^\prime)^2}{l^2}\right) \left( 1 - \frac{(y - y^\prime)^2}{l^2} \right
+    B^S_{vv} &amp;= \sigma_v^2 \text{exp}\left( -\frac{(\mathbf{r} - \mathbf{r}^\prime)^2}{l^2}\right)\left( 1 - \frac{(x - x^\prime)^2}{l^2} \right
+    B^S_{uv} &amp;= \sigma_u \sigma_v \text{exp}\left( -\frac{(\mathbf{r} - \mathbf{r}^\prime)^2}{l^2}\right) \left( \frac{(x - x^\prime)(y - y^\prime)}{l^2} \right
+\end{aligned}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\sigma_T\)</span>, <span class="math notranslate nohighlight">\(\sigma_u\)</span>, and <span class="math notranslate nohighlight">\(\sigma_v\)</span> are the standard deviations of the corresponding fields, <span class="math notranslate nohighlight">\(l_T\)</span> and <span class="math notranslate nohighlight">\(l\)</span> are correlation lengths of temperature and velocity, and the vectors <span class="math notranslate nohighlight">\(\mathbf{r} = (x,y)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{r}^\prime = (x^\prime,y^\prime)\)</span>.
+With the correlation functions in Equations~\eqref{eq:corr1} and \eqref{eq:corr2}, one can estimate the covariance matrices <span class="math notranslate nohighlight">\(\mathbf{R}_{\mathbf{md}_0}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{R}_{\mathbf{d}_0\mathbf{d}_0}\)</span>, and finally the coefficient matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> using Equation~\eqref{eq:Amatrix}.
+In the described TDSI algorithm, five parameters must be chosen or deduced: <span class="math notranslate nohighlight">\(\sigma_T\)</span>, <span class="math notranslate nohighlight">\(\sigma_u\)</span>, <span class="math notranslate nohighlight">\(\sigma_v\)</span>, <span class="math notranslate nohighlight">\(l_T\)</span>, and <span class="math notranslate nohighlight">\(l\)</span>.
+All parameters may be estimated from the sonic anemometer installed on Station 8 of the AT array.
+Note that the formulation in Equations~\eqref{eq:corr1} and \eqref{eq:corr2} employ a Gaussian description of the covariance for temperature and velocity fields.
+Other formulations may be more physically representative of the field variance in the atmospheric boundary layer but may come at increased computational costs.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./contents"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../gettingStarted.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Installation</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="01_SignalProcessingModule_20240410/01_SignalProcessingModule_20240410.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">The <code class="docutils literal notranslate"><span class="pre">atom</span></code> Signal Processing Module</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-field-estimation">Mean Field Estimation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-dependent-stochastic-inversion">Time-Dependent Stochastic Inversion</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Nicholas Hamilton
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

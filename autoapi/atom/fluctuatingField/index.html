@@ -1,0 +1,1319 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>atom.fluctuatingField &#8212; Acoustic Travel Time Tomography</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'autoapi/atom/fluctuatingField/index';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="atom.fluctuatingField.covarinceMatix" href="covarinceMatix/index.html" />
+    <link rel="prev" title="atom.backgroundFlow.linearsystem" href="../backgroundFlow/linearsystem/index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Acoustic Travel Time Tomography</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../intro.html">
+                    Introduction to Acoustic Travel Time Tomography
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../gettingStarted.html">Installation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Theory Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../contents/theory.html">Theory</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Walkthrough</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../contents/01_SignalProcessingModule_20240410/01_SignalProcessingModule_20240410.html">The <code class="docutils literal notranslate"><span class="pre">atom</span></code> Signal Processing Module</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../../../contents/02_travelTimeExtractor_20240411/02_travelTimeExtractor_20240411.html">Travel Time Extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contents/02a_travelTimeDebug_20240104/02a_travelTimeDebug_20240104.html">Travel time measurement review, validation, and bias estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contents/03_bulkFieldEstimation_20240412/03_bulkFieldEstimation_20240412.html">The <code class="docutils literal notranslate"><span class="pre">atom.backgroundFlow</span></code> module</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../../../contents/03a_sonic_v_array_20230110/03a_sonic_v_array_20230110.html">Bulk flow validation against sonic anemometer</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../../../contents/04_modelGrid_and_covarianceMatrix_20240416/04_modelGrid_and_covarianceMatrix_20240416.html">Covariance Matrices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contents/05_TDSI_20240416/05_TDSI_20240416.html">Time-Dependent Stochastic Inversion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contents/06_LES_virtualArray_20240419/06_LES_virtualArray_20240419.html">Virtual Acoustic Tomography Array</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">atom</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="../backgroundFlow/index.html">atom.backgroundFlow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../backgroundFlow/flowModel/index.html">atom.backgroundFlow.flowModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../backgroundFlow/linearsystem/index.html">atom.backgroundFlow.linearsystem</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 current active has-children"><a class="current reference internal" href="#">atom.fluctuatingField</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="covarinceMatix/index.html">atom.fluctuatingField.covarinceMatix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modelGrid/index.html">atom.fluctuatingField.modelGrid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pathSetup/index.html">atom.fluctuatingField.pathSetup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="timeDependentStochasticInversion/index.html">atom.fluctuatingField.timeDependentStochasticInversion</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../signalProc/index.html">atom.signalProc</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../signalProc/atarray/index.html">atom.signalProc.atarray</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../signalProc/audiodata/index.html">atom.signalProc.audiodata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../signalProc/auxdata/index.html">atom.signalProc.auxdata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../signalProc/constants/index.html">atom.signalProc.constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../signalProc/traveltimeextractor/index.html">atom.signalProc.traveltimeextractor</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../simulation/index.html">atom.simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../simulation/les/index.html">atom.simulation.les</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/index.html">atom.utils</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fautoapi/atom/fluctuatingField/index.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/autoapi/atom/fluctuatingField/index.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>atom.fluctuatingField</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classes">Classes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#package-contents">Package Contents</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.ModelGrid"><code class="docutils literal notranslate"><span class="pre">ModelGrid</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.ModelGrid.nModelPointsX"><code class="docutils literal notranslate"><span class="pre">ModelGrid.nModelPointsX</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.ModelGrid.nModelPointsY"><code class="docutils literal notranslate"><span class="pre">ModelGrid.nModelPointsY</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.ModelGrid.modelLimsX"><code class="docutils literal notranslate"><span class="pre">ModelGrid.modelLimsX</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.ModelGrid.modelLimsY"><code class="docutils literal notranslate"><span class="pre">ModelGrid.modelLimsY</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id0"><code class="docutils literal notranslate"><span class="pre">ModelGrid.nModelPointsX</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><code class="docutils literal notranslate"><span class="pre">ModelGrid.nModelPointsY</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"><code class="docutils literal notranslate"><span class="pre">ModelGrid.modelLimsX</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3"><code class="docutils literal notranslate"><span class="pre">ModelGrid.modelLimsY</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.ModelGrid.ds"><code class="docutils literal notranslate"><span class="pre">ModelGrid.ds</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.ModelGrid.buildModelGrid"><code class="docutils literal notranslate"><span class="pre">ModelGrid.buildModelGrid()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.ModelGrid.getDataset"><code class="docutils literal notranslate"><span class="pre">ModelGrid.getDataset()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.ModelGrid.to_netcdf"><code class="docutils literal notranslate"><span class="pre">ModelGrid.to_netcdf()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.ModelGrid.from_netcdf"><code class="docutils literal notranslate"><span class="pre">ModelGrid.from_netcdf()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.ModelGrid.to_pickle"><code class="docutils literal notranslate"><span class="pre">ModelGrid.to_pickle()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.ModelGrid.from_pickle"><code class="docutils literal notranslate"><span class="pre">ModelGrid.from_pickle()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.ModelGrid.describe"><code class="docutils literal notranslate"><span class="pre">ModelGrid.describe()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.PathSetup"><code class="docutils literal notranslate"><span class="pre">PathSetup</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.PathSetup.atarray"><code class="docutils literal notranslate"><span class="pre">PathSetup.atarray</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.PathSetup.ds"><code class="docutils literal notranslate"><span class="pre">PathSetup.ds</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id4"><code class="docutils literal notranslate"><span class="pre">PathSetup.atarray</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id5"><code class="docutils literal notranslate"><span class="pre">PathSetup.ds</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.PathSetup.setupPathIntegrals"><code class="docutils literal notranslate"><span class="pre">PathSetup.setupPathIntegrals()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.PathSetup.getDataset"><code class="docutils literal notranslate"><span class="pre">PathSetup.getDataset()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.PathSetup.to_netcdf"><code class="docutils literal notranslate"><span class="pre">PathSetup.to_netcdf()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.PathSetup.from_netcdf"><code class="docutils literal notranslate"><span class="pre">PathSetup.from_netcdf()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.PathSetup.to_pickle"><code class="docutils literal notranslate"><span class="pre">PathSetup.to_pickle()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.PathSetup.from_pickle"><code class="docutils literal notranslate"><span class="pre">PathSetup.from_pickle()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.PathSetup.describe"><code class="docutils literal notranslate"><span class="pre">PathSetup.describe()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.CovarianceMatrices"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.CovarianceMatrices.modelGrid"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices.modelGrid</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.CovarianceMatrices.atarray"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices.atarray</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.CovarianceMatrices.linearSystem"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices.linearSystem</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.CovarianceMatrices.sigmaT"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices.sigmaT</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.CovarianceMatrices.lT"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices.lT</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.CovarianceMatrices.sigmaU"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices.sigmaU</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.CovarianceMatrices.sigmaV"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices.sigmaV</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.CovarianceMatrices.l"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices.l</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.CovarianceMatrices.nFrames"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices.nFrames</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.CovarianceMatrices.alignment"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices.alignment</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id6"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices.modelGrid</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id7"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices.atarray</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.CovarianceMatrices.ds"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices.ds</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.CovarianceMatrices.covarianceFunction"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices.covarianceFunction()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.CovarianceMatrices.calculateCovariances"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices.calculateCovariances()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.CovarianceMatrices.modelDataCovarianceMatrix"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices.modelDataCovarianceMatrix()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.CovarianceMatrices.dataDataCovarianceMatrix"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices.dataDataCovarianceMatrix()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.CovarianceMatrices.assembleTDSICovarianceMatrices"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices.assembleTDSICovarianceMatrices()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.CovarianceMatrices._checkDomainLimits"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices._checkDomainLimits()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.CovarianceMatrices.makeDummyCoords"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices.makeDummyCoords()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.CovarianceMatrices.to_netcdf"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices.to_netcdf()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.CovarianceMatrices.from_netcdf"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices.from_netcdf()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.CovarianceMatrices.to_pickle"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices.to_pickle()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.CovarianceMatrices.from_pickle"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices.from_pickle()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.CovarianceMatrices.describe"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices.describe()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.TimeDependentStochasticInversion"><code class="docutils literal notranslate"><span class="pre">TimeDependentStochasticInversion</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.TimeDependentStochasticInversion.modelGrid"><code class="docutils literal notranslate"><span class="pre">TimeDependentStochasticInversion.modelGrid</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.TimeDependentStochasticInversion.atarray"><code class="docutils literal notranslate"><span class="pre">TimeDependentStochasticInversion.atarray</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.TimeDependentStochasticInversion.covarMatrices"><code class="docutils literal notranslate"><span class="pre">TimeDependentStochasticInversion.covarMatrices</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.TimeDependentStochasticInversion.bulkFlowData"><code class="docutils literal notranslate"><span class="pre">TimeDependentStochasticInversion.bulkFlowData</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.TimeDependentStochasticInversion.retrieval"><code class="docutils literal notranslate"><span class="pre">TimeDependentStochasticInversion.retrieval</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.TimeDependentStochasticInversion.stencil"><code class="docutils literal notranslate"><span class="pre">TimeDependentStochasticInversion.stencil</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.TimeDependentStochasticInversion.frameSets"><code class="docutils literal notranslate"><span class="pre">TimeDependentStochasticInversion.frameSets</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.TimeDependentStochasticInversion.optimalStochasticInverseOperator"><code class="docutils literal notranslate"><span class="pre">TimeDependentStochasticInversion.optimalStochasticInverseOperator()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.TimeDependentStochasticInversion.assembleDataVector"><code class="docutils literal notranslate"><span class="pre">TimeDependentStochasticInversion.assembleDataVector()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.TimeDependentStochasticInversion.repackDataVector"><code class="docutils literal notranslate"><span class="pre">TimeDependentStochasticInversion.repackDataVector()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.TimeDependentStochasticInversion.getFrameSets"><code class="docutils literal notranslate"><span class="pre">TimeDependentStochasticInversion.getFrameSets()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.TimeDependentStochasticInversion.calculateFluctuatingFields"><code class="docutils literal notranslate"><span class="pre">TimeDependentStochasticInversion.calculateFluctuatingFields()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.TimeDependentStochasticInversion.to_netcdf"><code class="docutils literal notranslate"><span class="pre">TimeDependentStochasticInversion.to_netcdf()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.TimeDependentStochasticInversion.from_netcdf"><code class="docutils literal notranslate"><span class="pre">TimeDependentStochasticInversion.from_netcdf()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.TimeDependentStochasticInversion.to_pickle"><code class="docutils literal notranslate"><span class="pre">TimeDependentStochasticInversion.to_pickle()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.TimeDependentStochasticInversion.from_pickle"><code class="docutils literal notranslate"><span class="pre">TimeDependentStochasticInversion.from_pickle()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.TimeDependentStochasticInversion.describe"><code class="docutils literal notranslate"><span class="pre">TimeDependentStochasticInversion.describe()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="module-atom.fluctuatingField">
+<span id="atom-fluctuatingfield"></span><h1>atom.fluctuatingField<a class="headerlink" href="#module-atom.fluctuatingField" title="Link to this heading">#</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="covarinceMatix/index.html">atom.fluctuatingField.covarinceMatix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modelGrid/index.html">atom.fluctuatingField.modelGrid</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pathSetup/index.html">atom.fluctuatingField.pathSetup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="timeDependentStochasticInversion/index.html">atom.fluctuatingField.timeDependentStochasticInversion</a></li>
+</ul>
+</div>
+</section>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">#</a></h2>
+</section>
+<section id="package-contents">
+<h2>Package Contents<a class="headerlink" href="#package-contents" title="Link to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="atom.fluctuatingField.ModelGrid">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">atom.fluctuatingField.</span></span><span class="sig-name descname"><span class="pre">ModelGrid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nModelPointsX</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nModelPointsY</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modelLimsX</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modelLimsY</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#atom.fluctuatingField.ModelGrid" title="Link to this definition">#</a></dt>
+<dd><p>A class that represents a model grid for TDSI solution.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="atom.fluctuatingField.ModelGrid.nModelPointsX">
+<span class="sig-name descname"><span class="pre">nModelPointsX</span></span><a class="headerlink" href="#atom.fluctuatingField.ModelGrid.nModelPointsX" title="Link to this definition">#</a></dt>
+<dd><p>Number of points in the x-direction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="atom.fluctuatingField.ModelGrid.nModelPointsY">
+<span class="sig-name descname"><span class="pre">nModelPointsY</span></span><a class="headerlink" href="#atom.fluctuatingField.ModelGrid.nModelPointsY" title="Link to this definition">#</a></dt>
+<dd><p>Number of points in the y-direction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="atom.fluctuatingField.ModelGrid.modelLimsX">
+<span class="sig-name descname"><span class="pre">modelLimsX</span></span><a class="headerlink" href="#atom.fluctuatingField.ModelGrid.modelLimsX" title="Link to this definition">#</a></dt>
+<dd><p>Lower and upper bounds for the x-direction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple[float, float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="atom.fluctuatingField.ModelGrid.modelLimsY">
+<span class="sig-name descname"><span class="pre">modelLimsY</span></span><a class="headerlink" href="#atom.fluctuatingField.ModelGrid.modelLimsY" title="Link to this definition">#</a></dt>
+<dd><p>Lower and upper bounds for the y-direction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple[float, float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Methods:
+buildModelGrid(): Generates a model grid using the given parameters.
+getDataset(): Returns the xarray Dataset representing the model grid.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">nModelPointsX</span></span><a class="headerlink" href="#id0" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id1">
+<span class="sig-name descname"><span class="pre">nModelPointsY</span></span><a class="headerlink" href="#id1" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id2">
+<span class="sig-name descname"><span class="pre">modelLimsX</span></span><a class="headerlink" href="#id2" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id3">
+<span class="sig-name descname"><span class="pre">modelLimsY</span></span><a class="headerlink" href="#id3" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="atom.fluctuatingField.ModelGrid.ds">
+<span class="sig-name descname"><span class="pre">ds</span></span><a class="headerlink" href="#atom.fluctuatingField.ModelGrid.ds" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="atom.fluctuatingField.ModelGrid.buildModelGrid">
+<span class="sig-name descname"><span class="pre">buildModelGrid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#atom.fluctuatingField.ModelGrid.buildModelGrid" title="Link to this definition">#</a></dt>
+<dd><p>Generates a model grid using the given parameters.</p>
+<p>This method creates a model grid as a 2D array, where ‘x’ and ‘y’ values are equally spaced based on the input parameters.
+The grid is then saved as an xarray DataArray in the ‘modelGrid’ attribute of the instance.</p>
+<p>Note: This method does not return any value, but directly modifies the ‘modelGrid’ attribute of the class instance.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="atom.fluctuatingField.ModelGrid.getDataset">
+<span class="sig-name descname"><span class="pre">getDataset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#atom.fluctuatingField.ModelGrid.getDataset" title="Link to this definition">#</a></dt>
+<dd><p>Returns the xarray Dataset representing the model grid.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="atom.fluctuatingField.ModelGrid.to_netcdf">
+<span class="sig-name descname"><span class="pre">to_netcdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filePath</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#atom.fluctuatingField.ModelGrid.to_netcdf" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="atom.fluctuatingField.ModelGrid.from_netcdf">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_netcdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filePath</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#atom.fluctuatingField.ModelGrid.from_netcdf" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="atom.fluctuatingField.ModelGrid.to_pickle">
+<span class="sig-name descname"><span class="pre">to_pickle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#atom.fluctuatingField.ModelGrid.to_pickle" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="atom.fluctuatingField.ModelGrid.from_pickle">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_pickle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#atom.fluctuatingField.ModelGrid.from_pickle" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="atom.fluctuatingField.ModelGrid.describe">
+<span class="sig-name descname"><span class="pre">describe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#atom.fluctuatingField.ModelGrid.describe" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="atom.fluctuatingField.PathSetup">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">atom.fluctuatingField.</span></span><span class="sig-name descname"><span class="pre">PathSetup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atarray</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#atom.fluctuatingField.PathSetup" title="Link to this definition">#</a></dt>
+<dd><p>This class is responsible for setting up path integral calculations for a given set of speakers and microphones.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="atom.fluctuatingField.PathSetup.atarray">
+<span class="sig-name descname"><span class="pre">atarray</span></span><a class="headerlink" href="#atom.fluctuatingField.PathSetup.atarray" title="Link to this definition">#</a></dt>
+<dd><p>Contains the speakers and microphones data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="atom.fluctuatingField.PathSetup.ds">
+<span class="sig-name descname"><span class="pre">ds</span></span><a class="headerlink" href="#atom.fluctuatingField.PathSetup.ds" title="Link to this definition">#</a></dt>
+<dd><p>An xarray Dataset to store the calculations. Initially an empty dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>xr.Dataset</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id4">
+<span class="sig-name descname"><span class="pre">atarray</span></span><a class="headerlink" href="#id4" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id5">
+<span class="sig-name descname"><span class="pre">ds</span></span><a class="headerlink" href="#id5" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="atom.fluctuatingField.PathSetup.setupPathIntegrals">
+<span class="sig-name descname"><span class="pre">setupPathIntegrals</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#atom.fluctuatingField.PathSetup.setupPathIntegrals" title="Link to this definition">#</a></dt>
+<dd><p>Sets up path integral calculations for a given set of speakers and microphones.</p>
+<p class="rubric">Notes</p>
+<p>This method does not return any value, but modifies the class instance by adding a new attribute ‘self.ds’ which is
+an xarray Dataset containing the information about the paths, points for integrations, and Euclidean distances between successive points.</p>
+<p>It expects that the following attributes are pre-defined in the instance:
+‘atarray.ds.speakerLocations’, ‘atarray.ds.micLocations’.</p>
+<p>The total number of points for integration along each path is hard-coded as 250.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="atom.fluctuatingField.PathSetup.getDataset">
+<span class="sig-name descname"><span class="pre">getDataset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#atom.fluctuatingField.PathSetup.getDataset" title="Link to this definition">#</a></dt>
+<dd><p>Returns the xarray Dataset representing the path integrals.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="atom.fluctuatingField.PathSetup.to_netcdf">
+<span class="sig-name descname"><span class="pre">to_netcdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filePath</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#atom.fluctuatingField.PathSetup.to_netcdf" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="atom.fluctuatingField.PathSetup.from_netcdf">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_netcdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filePath</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#atom.fluctuatingField.PathSetup.from_netcdf" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="atom.fluctuatingField.PathSetup.to_pickle">
+<span class="sig-name descname"><span class="pre">to_pickle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#atom.fluctuatingField.PathSetup.to_pickle" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="atom.fluctuatingField.PathSetup.from_pickle">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_pickle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#atom.fluctuatingField.PathSetup.from_pickle" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="atom.fluctuatingField.PathSetup.describe">
+<span class="sig-name descname"><span class="pre">describe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#atom.fluctuatingField.PathSetup.describe" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="atom.fluctuatingField.CovarianceMatrices">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">atom.fluctuatingField.</span></span><span class="sig-name descname"><span class="pre">CovarianceMatrices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">configDict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modelGrid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">xarray.Dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atarray</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">xarray.Dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">linearSystem</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">xarray.Dataset</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#atom.fluctuatingField.CovarianceMatrices" title="Link to this definition">#</a></dt>
+<dd><p>This class is responsible for calculating the covariance matrices used in spatial covariance function calculations.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="atom.fluctuatingField.CovarianceMatrices.modelGrid">
+<span class="sig-name descname"><span class="pre">modelGrid</span></span><a class="headerlink" href="#atom.fluctuatingField.CovarianceMatrices.modelGrid" title="Link to this definition">#</a></dt>
+<dd><p>Contains the model grid data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>xr.Dataset</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="atom.fluctuatingField.CovarianceMatrices.atarray">
+<span class="sig-name descname"><span class="pre">atarray</span></span><a class="headerlink" href="#atom.fluctuatingField.CovarianceMatrices.atarray" title="Link to this definition">#</a></dt>
+<dd><p>Contains acoustic tomography array data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>xr.Dataset</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="atom.fluctuatingField.CovarianceMatrices.linearSystem">
+<span class="sig-name descname"><span class="pre">linearSystem</span></span><a class="headerlink" href="#atom.fluctuatingField.CovarianceMatrices.linearSystem" title="Link to this definition">#</a></dt>
+<dd><p>Contains the bulk linear system data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>xr.Dataset</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="atom.fluctuatingField.CovarianceMatrices.sigmaT">
+<span class="sig-name descname"><span class="pre">sigmaT</span></span><a class="headerlink" href="#atom.fluctuatingField.CovarianceMatrices.sigmaT" title="Link to this definition">#</a></dt>
+<dd><p>Standard deviation of temperature. Default is 0.14.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="atom.fluctuatingField.CovarianceMatrices.lT">
+<span class="sig-name descname"><span class="pre">lT</span></span><a class="headerlink" href="#atom.fluctuatingField.CovarianceMatrices.lT" title="Link to this definition">#</a></dt>
+<dd><p>Length scale of temperature. Default is 15.0.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="atom.fluctuatingField.CovarianceMatrices.sigmaU">
+<span class="sig-name descname"><span class="pre">sigmaU</span></span><a class="headerlink" href="#atom.fluctuatingField.CovarianceMatrices.sigmaU" title="Link to this definition">#</a></dt>
+<dd><p>Standard deviation of u-component of wind. Default is 0.72.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="atom.fluctuatingField.CovarianceMatrices.sigmaV">
+<span class="sig-name descname"><span class="pre">sigmaV</span></span><a class="headerlink" href="#atom.fluctuatingField.CovarianceMatrices.sigmaV" title="Link to this definition">#</a></dt>
+<dd><p>Standard deviation of v-component of wind. Default is 0.42.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="atom.fluctuatingField.CovarianceMatrices.l">
+<span class="sig-name descname"><span class="pre">l</span></span><a class="headerlink" href="#atom.fluctuatingField.CovarianceMatrices.l" title="Link to this definition">#</a></dt>
+<dd><p>Length scale of wind. Default is 15.0.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="atom.fluctuatingField.CovarianceMatrices.nFrames">
+<span class="sig-name descname"><span class="pre">nFrames</span></span><a class="headerlink" href="#atom.fluctuatingField.CovarianceMatrices.nFrames" title="Link to this definition">#</a></dt>
+<dd><p>Number of <em>additional</em> frames to consider in covariance matrices and TDSI (the N in N+1 frames). Default is 0.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="atom.fluctuatingField.CovarianceMatrices.alignment">
+<span class="sig-name descname"><span class="pre">alignment</span></span><a class="headerlink" href="#atom.fluctuatingField.CovarianceMatrices.alignment" title="Link to this definition">#</a></dt>
+<dd><p>Alignment of the stencil selecting frames. Default is ‘center’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id6">
+<span class="sig-name descname"><span class="pre">modelGrid</span></span><a class="headerlink" href="#id6" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id7">
+<span class="sig-name descname"><span class="pre">atarray</span></span><a class="headerlink" href="#id7" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="atom.fluctuatingField.CovarianceMatrices.ds">
+<span class="sig-name descname"><span class="pre">ds</span></span><a class="headerlink" href="#atom.fluctuatingField.CovarianceMatrices.ds" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="atom.fluctuatingField.CovarianceMatrices.covarianceFunction">
+<span class="sig-name descname"><span class="pre">covarianceFunction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">modelGrid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">xarray.Dataset</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">component</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#atom.fluctuatingField.CovarianceMatrices.covarianceFunction" title="Link to this definition">#</a></dt>
+<dd><p>Calculates the spatial covariance function given a model grid and specific parameters. When timeDelay ~= 0, the second spatial coordinate in the covariance function r’ is shifted by the advection velocity and time delay  r’ + U delta t, assuming Taylor’s frozen field hypothesis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>modelGrid</strong> (<em>xr.Dataset</em><em>, </em><em>optional</em>) – The dataset containing the model grid with variables “x” and “y”.
+Default is None.</p></li>
+<li><p><strong>sigma</strong> (<em>float</em><em>, </em><em>optional</em>) – Standard deviation of the process. For “uv” correlation, a length 2 array
+representing standard deviation for x and y is expected. Default is None.</p></li>
+<li><p><strong>l</strong> (<em>float</em><em>, </em><em>optional</em>) – Length scale of the process. Default is None.</p></li>
+<li><p><strong>component</strong> (<em>str</em><em>, </em><em>optional</em>) – Specifies the type of component to be used for covariance calculation.
+Valid inputs are “TT”, “uu”, “vv”, and “uv”. Default is None.</p></li>
+<li><p><strong>timeDelay</strong> (<em>float</em><em>, </em><em>optional</em>) – time delay between frames in seconds. Default is 0.0.</p></li>
+<li><p><strong>advectionVelocity</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – advection velocity</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The calculated covariance matrix for the specified component.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>AssertionError</strong> – If the component is “uv” and sigma is not a length 2 array.</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>If the component is None, the function will prompt the user to specify a component.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="atom.fluctuatingField.CovarianceMatrices.calculateCovariances">
+<span class="sig-name descname"><span class="pre">calculateCovariances</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#atom.fluctuatingField.CovarianceMatrices.calculateCovariances" title="Link to this definition">#</a></dt>
+<dd><p>Calculates and assigns the covariance function values to the current dataset object.</p>
+<p class="rubric">Notes</p>
+<p>This method does not return any value, but directly modifies the dataset within the object instance.
+It expects that the following attributes are pre-defined in the dataset: modelGrid, sigmaT, lT, sigmaU,
+sigmaV, and l. The ‘modelXY’ coordinate is created by stacking ‘x’ and ‘y’ from the dataset.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="atom.fluctuatingField.CovarianceMatrices.modelDataCovarianceMatrix">
+<span class="sig-name descname"><span class="pre">modelDataCovarianceMatrix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#atom.fluctuatingField.CovarianceMatrices.modelDataCovarianceMatrix" title="Link to this definition">#</a></dt>
+<dd><p>Calculates the model-data covariance matrix and adds it to the instance’s dataset.</p>
+<p class="rubric">Notes</p>
+<p>This method does not return any value, but modifies the ‘ds’ attribute of the class instance by
+adding the ‘Bmd’ data array.
+It expects that the following attributes are pre-defined in the instance: ‘pathData’, ‘ds’,
+‘modelGrid’, ‘nModelPointsX’, ‘nModelPointsY’, ‘atarray.ds.pathOrientation’.
+The ‘ds’ attribute is an xarray Dataset instance and ‘atarray’ is an attribute of the class where
+this method is defined.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="atom.fluctuatingField.CovarianceMatrices.dataDataCovarianceMatrix">
+<span class="sig-name descname"><span class="pre">dataDataCovarianceMatrix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">xarray.DataArray</span></span></span><a class="headerlink" href="#atom.fluctuatingField.CovarianceMatrices.dataDataCovarianceMatrix" title="Link to this definition">#</a></dt>
+<dd><p>Calculates the data-data covariance matrix and adds it to the instance’s dataset.</p>
+<p class="rubric">Notes</p>
+<p>This method does not return any value, but modifies the ‘ds’ attribute of the class instance by
+adding the ‘Bdd’ data array.
+It expects that the following attributes are pre-defined in the instance: ‘pathData’, ‘ds’,
+‘modelGrid’, ‘nModelPointsX’, ‘nModelPointsY’, ‘ds.pathOrientation’.
+The ‘ds’ attribute is an xarray Dataset instance and ‘modelGrid’ is an attribute of the class where
+this method is defined.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="atom.fluctuatingField.CovarianceMatrices.assembleTDSICovarianceMatrices">
+<span class="sig-name descname"><span class="pre">assembleTDSICovarianceMatrices</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#atom.fluctuatingField.CovarianceMatrices.assembleTDSICovarianceMatrices" title="Link to this definition">#</a></dt>
+<dd><p>Assembles the TDSI (Time-Dependent Stochastic Inversion) covariance matrices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nFrames</strong> (<em>int</em><em>, </em><em>optional</em>) – The number of frames to consider. If not provided, it uses the value of self.nFrames.</p></li>
+<li><p><strong>alignment</strong> (<em>str</em><em>, </em><em>optional</em>) – The alignment preference for time delays. Accepts ‘center’, ‘forward’, or ‘backward’.
+If not provided, it uses the value of self.alignment.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the alignment type is not recognized.</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="atom.fluctuatingField.CovarianceMatrices._checkDomainLimits">
+<span class="sig-name descname"><span class="pre">_checkDomainLimits</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#atom.fluctuatingField.CovarianceMatrices._checkDomainLimits" title="Link to this definition">#</a></dt>
+<dd><p>Checks if the domain limits are within the domain of the data.</p>
+<p>Args:
+modelx (numpy.ndarray): x-coordinates of the data.
+modely (numpy.ndarray): y-coordinates of the data.
+xlim (list): x-limits of the domain.
+ylim (list): y-limits of the domain.</p>
+<p>Returns:
+bool: True if the domain limits are within the domain of the data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="atom.fluctuatingField.CovarianceMatrices.makeDummyCoords">
+<span class="sig-name descname"><span class="pre">makeDummyCoords</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#atom.fluctuatingField.CovarianceMatrices.makeDummyCoords" title="Link to this definition">#</a></dt>
+<dd><p>make dummy coordinates for the model data so that it can be stacked, unstacked, and subselected without errors.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="atom.fluctuatingField.CovarianceMatrices.to_netcdf">
+<span class="sig-name descname"><span class="pre">to_netcdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filePath</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#atom.fluctuatingField.CovarianceMatrices.to_netcdf" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="atom.fluctuatingField.CovarianceMatrices.from_netcdf">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_netcdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filePath</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#atom.fluctuatingField.CovarianceMatrices.from_netcdf" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="atom.fluctuatingField.CovarianceMatrices.to_pickle">
+<span class="sig-name descname"><span class="pre">to_pickle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#atom.fluctuatingField.CovarianceMatrices.to_pickle" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="atom.fluctuatingField.CovarianceMatrices.from_pickle">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_pickle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#atom.fluctuatingField.CovarianceMatrices.from_pickle" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="atom.fluctuatingField.CovarianceMatrices.describe">
+<span class="sig-name descname"><span class="pre">describe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#atom.fluctuatingField.CovarianceMatrices.describe" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="atom.fluctuatingField.TimeDependentStochasticInversion">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">atom.fluctuatingField.</span></span><span class="sig-name descname"><span class="pre">TimeDependentStochasticInversion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">modelGrid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">xarray.Dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atarray</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">xarray.Dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">covarMatrices</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">xarray.Dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bulkFlowData</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">xarray.Dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stencil</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[-1,</span> <span class="pre">0,</span> <span class="pre">1]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frameSets</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[-2,</span> <span class="pre">-1,</span> <span class="pre">0,</span> <span class="pre">1,</span> <span class="pre">2]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retrieval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'single'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#atom.fluctuatingField.TimeDependentStochasticInversion" title="Link to this definition">#</a></dt>
+<dd><p>Instantiates the TimeDependentStochasticInversion class with the provided datasets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>modelGrid</strong> (<em>xr.Dataset</em>) – The dataset containing the model grid.</p></li>
+<li><p><strong>atarray</strong> (<em>xr.Dataset</em>) – The dataset containing the path data.</p></li>
+<li><p><strong>covarMatrices</strong> (<em>xr.Dataset</em>) – The dataset containing the covariance matrices.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="atom.fluctuatingField.TimeDependentStochasticInversion.modelGrid">
+<span class="sig-name descname"><span class="pre">modelGrid</span></span><a class="headerlink" href="#atom.fluctuatingField.TimeDependentStochasticInversion.modelGrid" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="atom.fluctuatingField.TimeDependentStochasticInversion.atarray">
+<span class="sig-name descname"><span class="pre">atarray</span></span><a class="headerlink" href="#atom.fluctuatingField.TimeDependentStochasticInversion.atarray" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="atom.fluctuatingField.TimeDependentStochasticInversion.covarMatrices">
+<span class="sig-name descname"><span class="pre">covarMatrices</span></span><a class="headerlink" href="#atom.fluctuatingField.TimeDependentStochasticInversion.covarMatrices" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="atom.fluctuatingField.TimeDependentStochasticInversion.bulkFlowData">
+<span class="sig-name descname"><span class="pre">bulkFlowData</span></span><a class="headerlink" href="#atom.fluctuatingField.TimeDependentStochasticInversion.bulkFlowData" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="atom.fluctuatingField.TimeDependentStochasticInversion.retrieval">
+<span class="sig-name descname"><span class="pre">retrieval</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'single'</span></em><a class="headerlink" href="#atom.fluctuatingField.TimeDependentStochasticInversion.retrieval" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="atom.fluctuatingField.TimeDependentStochasticInversion.stencil">
+<span class="sig-name descname"><span class="pre">stencil</span></span><a class="headerlink" href="#atom.fluctuatingField.TimeDependentStochasticInversion.stencil" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="atom.fluctuatingField.TimeDependentStochasticInversion.frameSets">
+<span class="sig-name descname"><span class="pre">frameSets</span></span><a class="headerlink" href="#atom.fluctuatingField.TimeDependentStochasticInversion.frameSets" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="atom.fluctuatingField.TimeDependentStochasticInversion.optimalStochasticInverseOperator">
+<span class="sig-name descname"><span class="pre">optimalStochasticInverseOperator</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#atom.fluctuatingField.TimeDependentStochasticInversion.optimalStochasticInverseOperator" title="Link to this definition">#</a></dt>
+<dd><p>Calculates the optimal stochastic inverse operator and adds it to the instance’s dataset.</p>
+<p>This method computes the matrix product of the reshaped model-data covariance matrix and the inverse of the data-data covariance matrix. The resulting matrix ‘A’, representing the optimal stochastic inverse operator, is then reshaped and stored in the instance’s dataset as ‘A’.</p>
+<p class="rubric">Notes</p>
+<p>This method does not return any value, but modifies the ‘ds’ attribute of the class instance by adding the ‘A’ data array.
+It expects that the following attributes are pre-defined in the instance: ‘ds’, ‘ds.Rmd’, ‘ds.Rdd’, ‘nModelPointsX’, ‘nModelPointsY’, and ‘atarray’.
+The ‘ds’ attribute is an xarray Dataset instance.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="atom.fluctuatingField.TimeDependentStochasticInversion.assembleDataVector">
+<span class="sig-name descname"><span class="pre">assembleDataVector</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#atom.fluctuatingField.TimeDependentStochasticInversion.assembleDataVector" title="Link to this definition">#</a></dt>
+<dd><blockquote>
+<div><p>Assembles the data vector <cite>d</cite>.</p>
+<dl>
+<dt>Notes:</dt><dd><p>This method does not return any value, but modifies the ‘ds’ attribute of the class instance by adding the ‘d’ data array.
+The data vector <cite>d</cite> is assembled as:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{d} = \left[ \mathbf{d}(t - N    au)~;~ \mathbf{d}(t - N         au+     au)~;~\hdots ~;~ \mathbf{d}(t)\]</div>
+</dd>
+</dl>
+</div></blockquote>
+<p>ight]</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="atom.fluctuatingField.TimeDependentStochasticInversion.repackDataVector">
+<span class="sig-name descname"><span class="pre">repackDataVector</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#atom.fluctuatingField.TimeDependentStochasticInversion.repackDataVector" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="atom.fluctuatingField.TimeDependentStochasticInversion.getFrameSets">
+<span class="sig-name descname"><span class="pre">getFrameSets</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#atom.fluctuatingField.TimeDependentStochasticInversion.getFrameSets" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="atom.fluctuatingField.TimeDependentStochasticInversion.calculateFluctuatingFields">
+<span class="sig-name descname"><span class="pre">calculateFluctuatingFields</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#atom.fluctuatingField.TimeDependentStochasticInversion.calculateFluctuatingFields" title="Link to this definition">#</a></dt>
+<dd><p>Calculates the fluctuating fields and adds it to the instance’s dataset.</p>
+<p class="rubric">Notes</p>
+<p>This method does not return any value, but modifies the ‘ds’ attribute of the class instance by adding the ‘m’ data array.
+The fluctuating fields <cite>m</cite> are calculated as:</p>
+<div class="math notranslate nohighlight">
+\[m = \mathbf{A} \mathbf{d}\]</div>
+<p>where <cite>m</cite> contains all of the fluctuating field data <span class="math notranslate nohighlight">\(m = [T'(r,t),u'(r,t),v'(r,t)]\)</span>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="atom.fluctuatingField.TimeDependentStochasticInversion.to_netcdf">
+<span class="sig-name descname"><span class="pre">to_netcdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filePath</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#atom.fluctuatingField.TimeDependentStochasticInversion.to_netcdf" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="atom.fluctuatingField.TimeDependentStochasticInversion.from_netcdf">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_netcdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filePath</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#atom.fluctuatingField.TimeDependentStochasticInversion.from_netcdf" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="atom.fluctuatingField.TimeDependentStochasticInversion.to_pickle">
+<span class="sig-name descname"><span class="pre">to_pickle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#atom.fluctuatingField.TimeDependentStochasticInversion.to_pickle" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="atom.fluctuatingField.TimeDependentStochasticInversion.from_pickle">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_pickle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#atom.fluctuatingField.TimeDependentStochasticInversion.from_pickle" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="atom.fluctuatingField.TimeDependentStochasticInversion.describe">
+<span class="sig-name descname"><span class="pre">describe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#atom.fluctuatingField.TimeDependentStochasticInversion.describe" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./autoapi/atom/fluctuatingField"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../backgroundFlow/linearsystem/index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">atom.backgroundFlow.linearsystem</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="covarinceMatix/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">atom.fluctuatingField.covarinceMatix</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classes">Classes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#package-contents">Package Contents</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.ModelGrid"><code class="docutils literal notranslate"><span class="pre">ModelGrid</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.ModelGrid.nModelPointsX"><code class="docutils literal notranslate"><span class="pre">ModelGrid.nModelPointsX</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.ModelGrid.nModelPointsY"><code class="docutils literal notranslate"><span class="pre">ModelGrid.nModelPointsY</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.ModelGrid.modelLimsX"><code class="docutils literal notranslate"><span class="pre">ModelGrid.modelLimsX</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.ModelGrid.modelLimsY"><code class="docutils literal notranslate"><span class="pre">ModelGrid.modelLimsY</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id0"><code class="docutils literal notranslate"><span class="pre">ModelGrid.nModelPointsX</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><code class="docutils literal notranslate"><span class="pre">ModelGrid.nModelPointsY</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"><code class="docutils literal notranslate"><span class="pre">ModelGrid.modelLimsX</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3"><code class="docutils literal notranslate"><span class="pre">ModelGrid.modelLimsY</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.ModelGrid.ds"><code class="docutils literal notranslate"><span class="pre">ModelGrid.ds</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.ModelGrid.buildModelGrid"><code class="docutils literal notranslate"><span class="pre">ModelGrid.buildModelGrid()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.ModelGrid.getDataset"><code class="docutils literal notranslate"><span class="pre">ModelGrid.getDataset()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.ModelGrid.to_netcdf"><code class="docutils literal notranslate"><span class="pre">ModelGrid.to_netcdf()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.ModelGrid.from_netcdf"><code class="docutils literal notranslate"><span class="pre">ModelGrid.from_netcdf()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.ModelGrid.to_pickle"><code class="docutils literal notranslate"><span class="pre">ModelGrid.to_pickle()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.ModelGrid.from_pickle"><code class="docutils literal notranslate"><span class="pre">ModelGrid.from_pickle()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.ModelGrid.describe"><code class="docutils literal notranslate"><span class="pre">ModelGrid.describe()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.PathSetup"><code class="docutils literal notranslate"><span class="pre">PathSetup</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.PathSetup.atarray"><code class="docutils literal notranslate"><span class="pre">PathSetup.atarray</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.PathSetup.ds"><code class="docutils literal notranslate"><span class="pre">PathSetup.ds</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id4"><code class="docutils literal notranslate"><span class="pre">PathSetup.atarray</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id5"><code class="docutils literal notranslate"><span class="pre">PathSetup.ds</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.PathSetup.setupPathIntegrals"><code class="docutils literal notranslate"><span class="pre">PathSetup.setupPathIntegrals()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.PathSetup.getDataset"><code class="docutils literal notranslate"><span class="pre">PathSetup.getDataset()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.PathSetup.to_netcdf"><code class="docutils literal notranslate"><span class="pre">PathSetup.to_netcdf()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.PathSetup.from_netcdf"><code class="docutils literal notranslate"><span class="pre">PathSetup.from_netcdf()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.PathSetup.to_pickle"><code class="docutils literal notranslate"><span class="pre">PathSetup.to_pickle()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.PathSetup.from_pickle"><code class="docutils literal notranslate"><span class="pre">PathSetup.from_pickle()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.PathSetup.describe"><code class="docutils literal notranslate"><span class="pre">PathSetup.describe()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.CovarianceMatrices"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.CovarianceMatrices.modelGrid"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices.modelGrid</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.CovarianceMatrices.atarray"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices.atarray</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.CovarianceMatrices.linearSystem"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices.linearSystem</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.CovarianceMatrices.sigmaT"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices.sigmaT</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.CovarianceMatrices.lT"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices.lT</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.CovarianceMatrices.sigmaU"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices.sigmaU</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.CovarianceMatrices.sigmaV"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices.sigmaV</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.CovarianceMatrices.l"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices.l</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.CovarianceMatrices.nFrames"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices.nFrames</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.CovarianceMatrices.alignment"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices.alignment</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id6"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices.modelGrid</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id7"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices.atarray</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.CovarianceMatrices.ds"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices.ds</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.CovarianceMatrices.covarianceFunction"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices.covarianceFunction()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.CovarianceMatrices.calculateCovariances"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices.calculateCovariances()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.CovarianceMatrices.modelDataCovarianceMatrix"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices.modelDataCovarianceMatrix()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.CovarianceMatrices.dataDataCovarianceMatrix"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices.dataDataCovarianceMatrix()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.CovarianceMatrices.assembleTDSICovarianceMatrices"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices.assembleTDSICovarianceMatrices()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.CovarianceMatrices._checkDomainLimits"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices._checkDomainLimits()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.CovarianceMatrices.makeDummyCoords"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices.makeDummyCoords()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.CovarianceMatrices.to_netcdf"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices.to_netcdf()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.CovarianceMatrices.from_netcdf"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices.from_netcdf()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.CovarianceMatrices.to_pickle"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices.to_pickle()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.CovarianceMatrices.from_pickle"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices.from_pickle()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.CovarianceMatrices.describe"><code class="docutils literal notranslate"><span class="pre">CovarianceMatrices.describe()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.TimeDependentStochasticInversion"><code class="docutils literal notranslate"><span class="pre">TimeDependentStochasticInversion</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.TimeDependentStochasticInversion.modelGrid"><code class="docutils literal notranslate"><span class="pre">TimeDependentStochasticInversion.modelGrid</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.TimeDependentStochasticInversion.atarray"><code class="docutils literal notranslate"><span class="pre">TimeDependentStochasticInversion.atarray</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.TimeDependentStochasticInversion.covarMatrices"><code class="docutils literal notranslate"><span class="pre">TimeDependentStochasticInversion.covarMatrices</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.TimeDependentStochasticInversion.bulkFlowData"><code class="docutils literal notranslate"><span class="pre">TimeDependentStochasticInversion.bulkFlowData</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.TimeDependentStochasticInversion.retrieval"><code class="docutils literal notranslate"><span class="pre">TimeDependentStochasticInversion.retrieval</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.TimeDependentStochasticInversion.stencil"><code class="docutils literal notranslate"><span class="pre">TimeDependentStochasticInversion.stencil</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.TimeDependentStochasticInversion.frameSets"><code class="docutils literal notranslate"><span class="pre">TimeDependentStochasticInversion.frameSets</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.TimeDependentStochasticInversion.optimalStochasticInverseOperator"><code class="docutils literal notranslate"><span class="pre">TimeDependentStochasticInversion.optimalStochasticInverseOperator()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.TimeDependentStochasticInversion.assembleDataVector"><code class="docutils literal notranslate"><span class="pre">TimeDependentStochasticInversion.assembleDataVector()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.TimeDependentStochasticInversion.repackDataVector"><code class="docutils literal notranslate"><span class="pre">TimeDependentStochasticInversion.repackDataVector()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.TimeDependentStochasticInversion.getFrameSets"><code class="docutils literal notranslate"><span class="pre">TimeDependentStochasticInversion.getFrameSets()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.TimeDependentStochasticInversion.calculateFluctuatingFields"><code class="docutils literal notranslate"><span class="pre">TimeDependentStochasticInversion.calculateFluctuatingFields()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.TimeDependentStochasticInversion.to_netcdf"><code class="docutils literal notranslate"><span class="pre">TimeDependentStochasticInversion.to_netcdf()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.TimeDependentStochasticInversion.from_netcdf"><code class="docutils literal notranslate"><span class="pre">TimeDependentStochasticInversion.from_netcdf()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.TimeDependentStochasticInversion.to_pickle"><code class="docutils literal notranslate"><span class="pre">TimeDependentStochasticInversion.to_pickle()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.TimeDependentStochasticInversion.from_pickle"><code class="docutils literal notranslate"><span class="pre">TimeDependentStochasticInversion.from_pickle()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atom.fluctuatingField.TimeDependentStochasticInversion.describe"><code class="docutils literal notranslate"><span class="pre">TimeDependentStochasticInversion.describe()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Nicholas Hamilton
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
