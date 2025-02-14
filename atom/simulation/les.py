@@ -2,6 +2,7 @@ import xarray as xr
 from scipy.interpolate import RegularGridInterpolator
 import numpy as np
 from atom import utils
+from collections import OrderedDict
 
 
 class LESData:
@@ -35,26 +36,28 @@ class LESData:
             self.constants.gamma * self.constants.Ra * self.ds["TBulk"]
         )
 
-    def setup_interpolators(self):
+    def setup_interpolators(self, coords=["time", "x", "y"]):
         uFluc = self.ds.u - self.ds["uBulk"]
         vFluc = self.ds.v - self.ds["vBulk"]
         TFluc = self.ds.T - self.ds["TBulk"]
 
+        points = tuple([self.ds.coords[x].values for x in coords])
+
         self.uinterp = RegularGridInterpolator(
-            (self.ds.time, self.ds.x, self.ds.y),
-            uFluc.transpose("time", "x", "y").values,
+            (points),
+            uFluc.transpose(*coords).values,
         )
         self.vinterp = RegularGridInterpolator(
-            (self.ds.time, self.ds.x, self.ds.y),
-            vFluc.transpose("time", "x", "y").values,
+            (points),
+            vFluc.transpose(*coords).values,
         )
         self.Tinterp = RegularGridInterpolator(
-            (self.ds.time, self.ds.x, self.ds.y),
-            TFluc.transpose("time", "x", "y").values,
+            (points),
+            TFluc.transpose(*coords).values,
         )
 
     # define a function for interpolation first (will turn this into a class)
-    def interpolate_field(self, times=None):
+    def interpolate_field(self, coords=["time", "x", "y"]):
         """
         The method interpolates LES data at given points.
         - times: times over which to interpolate velocity and temperature fields.
@@ -63,52 +66,43 @@ class LESData:
         """
 
         self.get_bulk_values()
-        self.setup_interpolators()
 
-        if times is None:
-            times = self.ds.time
+        interpCoords = OrderedDict(
+            {
+                "pathID": self.atarray.integralPoints.pathID,
+                "pointID": self.atarray.integralPoints.pointID,
+            }
+        )
+        xpts = self.atarray.integralPoints.isel(coord=0).values
+        ypts = self.atarray.integralPoints.isel(coord=1).values
 
-        coords = {
-            "time": times.values,
-            "pathID": self.atarray.integralPoints.pathID,
-            "pointID": self.atarray.integralPoints.pointID,
-        }
+        if "time" in coords:
+            interpCoords["time"] = self.ds.time
+            interpCoords.move_to_end("time", last=False)
+            times = self.ds.time.values[:, None, None]
+            xpts = xpts[None, ...]
+            ypts = ypts[None, ...]
 
-        xpts = self.atarray.integralPoints.isel(coord=0)
-        ypts = self.atarray.integralPoints.isel(coord=1)
+            points = (times, xpts, ypts)
+        else:
+            points = (xpts, ypts)
+
+        self.setup_interpolators(coords)
 
         self.ds["uint"] = xr.DataArray(
-            data=self.uinterp(
-                (
-                    times.values[:, None, None],
-                    xpts.values[None, ...],
-                    ypts.values[None, ...],
-                )
-            ),
-            coords=coords,
+            data=self.uinterp(points),
+            coords=interpCoords,
         )
         self.ds["vint"] = xr.DataArray(
-            data=self.vinterp(
-                (
-                    times.values[:, None, None],
-                    xpts.values[None, ...],
-                    ypts.values[None, ...],
-                )
-            ),
-            coords=coords,
+            data=self.vinterp(points),
+            coords=interpCoords,
         )
         self.ds["Tint"] = xr.DataArray(
-            data=self.Tinterp(
-                (
-                    times.values[:, None, None],
-                    xpts.values[None, ...],
-                    ypts.values[None, ...],
-                )
-            ),
-            coords=coords,
+            data=self.Tinterp(points),
+            coords=interpCoords,
         )
 
-    def calculate_travel_time(self):
+    def calculate_travel_time(self, coords=["time", "x", "y"]):
         """
         Calculate the travel time using Equation 5.
 
@@ -116,7 +110,7 @@ class LESData:
             float: Calculated travel time for the path including measurement error.
         """
         if "uint" not in self.ds:  # check for interpolated velocity fields
-            self.interpolate_field()
+            self.interpolate_field(coords=coords)
 
         cosPathOrientation = xr.DataArray(
             data=np.cos(self.atarray.pathOrientation.values),
