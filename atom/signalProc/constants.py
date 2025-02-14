@@ -3,5 +3,5 @@ from dataclasses import dataclass
 
 @dataclass
 class Constants:
-    gamma: float  # cfg.constants.gamma
-    Ra: float  # cfg.constants.Ra
+    gamma: float = 1.4
+    Ra: float = 287.058

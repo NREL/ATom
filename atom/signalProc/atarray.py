@@ -93,9 +93,9 @@ class ATArray:  # ordered=True
         self.calcPathInfo()
         ## Check the number of ray paths
         altNpaths = self.nMics * self.nSpeakers
-        assert (
-            altNpaths == self.nTravelPaths
-        ), "Specified number of travel paths does not match nMics * nSpeakers."
+        assert altNpaths == self.nTravelPaths, logging.error(
+            "Specified number of travel paths does not match nMics * nSpeakers."
+        )
 
         if self.includeCollocated is False:
             self.ds = self.stackPathID(
@@ -121,6 +121,9 @@ class ATArray:  # ordered=True
             self.ds.micLocations[:, 0].values[None, :]
             - self.ds.speakerLocations[:, 0].values[:, None]
         )
+
+        # print(delx)
+        self.ds = self.ds.unstack()
 
         micLocs = self.ds.micLocations - self.ds.micLocations.mean("mic")
         spkLocs = self.ds.speakerLocations - self.ds.speakerLocations.mean("spk")
@@ -155,6 +158,7 @@ class ATArray:  # ordered=True
             },
             name="pathVector",
         )
+        logger.debug(f"Path vectors calculated. Shape: {self.ds.pathVector.shape}")
         # path lengths
         self.ds["pathLength"] = xr.DataArray(
             data=np.linalg.norm(self.ds.pathVector, axis=-1),
@@ -168,6 +172,7 @@ class ATArray:  # ordered=True
             },
             name="pathLength",
         )
+        logger.debug(f"Path lengths calculated. Shape: {self.ds.pathLength.shape}")
         # path orientations
         self.ds["pathOrientation"] = xr.DataArray(
             data=np.arctan2(
@@ -183,6 +188,11 @@ class ATArray:  # ordered=True
             },
             name="pathOrientation",
         )
+        logger.debug(
+            f"Path orientations calculated. Shape: {self.ds.pathOrientation.shape}"
+        )
+
+        logger.debug("Path information calculation completed")
 
     def setupPathIntegrals(self):
         """
@@ -197,6 +207,7 @@ class ATArray:  # ordered=True
 
             The total number of points for integration along each path is hard-coded as 250.
         """
+        logger.debug("Setting up path integrals")
         paths = self.ds["integralPaths"]
         # Define points for path integrations (using Simpson integrals)
         ## coordinates of points for interpolation
@@ -226,6 +237,9 @@ class ATArray:  # ordered=True
                 "coord": self.ds.coord[:-1],
             },
         )
+        logger.debug(
+            f"Integral points calculated. Shape: {self.ds.integralPoints.shape}"
+        )
 
         ## delta along interpolated paths
         pointDifferences = np.diff(self.ds.integralPoints[:, :2, :], axis=1).squeeze()
@@ -234,6 +248,9 @@ class ATArray:  # ordered=True
             data=np.sqrt((pointDifferences[:, :-1] ** 2).sum(axis=-1)),
             coords={"pathID": self.ds.pathID},
         )
+        logger.debug(f"Integral dx calculated. Shape: {self.ds.integraldx.shape}")
+
+        logger.debug("Path integral setup completed")
 
     def excludeColocated(
         self, dim: str = "pathID", stackingDims: list = ["spk", "mic"]
@@ -274,49 +291,43 @@ class ATArray:  # ordered=True
 
         return ax
 
-    def plotPaths(self, ax=None, c=None, lw=1, alpha=0.75):
+    def plotPaths(self, **kwargs):
         import matplotlib.pyplot as plt
 
+        # Extract or set defaults for plotting parameters
+        ax = kwargs.pop("ax", None)
+        c = kwargs.pop("c", ".25")
+        lw = kwargs.pop("lw", 1)
+        alpha = kwargs.pop("alpha", 0.75)
+
+        # Create axis if not provided
         if ax is None:
             _, ax = plt.subplots()
 
-        if c is None:
-            c = ".25"
-            for ip, path in enumerate(self.ds.integralPaths.isel(coord=[0, 1])):
-                ax.plot(
-                    path.values[:, 1],
-                    path.values[:, 0],
-                    lw=lw,
-                    c=c,
-                    alpha=alpha,
-                )
-
-        else:
-            for ip, path in enumerate(self.ds.integralPaths.isel(coord=[0, 1])):
-                ax.plot(
-                    path.values[:, 1],
-                    path.values[:, 0],
-                    lw=lw,
-                    c=c[ip, :],
-                    alpha=alpha,
-                )
-                x = (
-                    0.8 * path.sel(coord="easting")[0]
-                    + 0.2 * path.sel(coord="easting")[1]
-                )
-                y = (
-                    0.8 * path.sel(coord="northing")[0]
-                    + 0.2 * path.sel(coord="northing")[1]
-                )
-                ax.text(
-                    x,
-                    y,
-                    f"P{ip}",
-                    color=".25",
-                    horizontalalignment="center",
-                    verticalalignment="center",
-                    fontsize=8,
-                )
+        for ip, path in enumerate(self.ds.integralPaths.isel(coord=[0, 1])):
+            ax.plot(
+                path.values[:, 1],
+                path.values[:, 0],
+                lw=lw,
+                c=c,
+                alpha=alpha,
+                **kwargs,  # Pass additional kwargs for customization
+            )
+            x = 0.8 * path.sel(coord="easting")[0] + 0.2 * path.sel(coord="easting")[1]
+            y = (
+                0.8 * path.sel(coord="northing")[0]
+                + 0.2 * path.sel(coord="northing")[1]
+            )
+            ax.text(
+                x,
+                y,
+                f"P{ip}",
+                color=".25",
+                horizontalalignment="center",
+                verticalalignment="center",
+                fontsize=8,
+                **kwargs,  # Pass additional kwargs for text customization
+            )
 
         ax.set_xlabel("Easting [m]")
         ax.set_ylabel("Northing [m]")
@@ -328,8 +339,14 @@ class ATArray:  # ordered=True
 
     @classmethod
     def from_netcdf(cls, filePath):
-        cls.ds = utils.from_netcdf(filePath)
-        return cls
+        logger.debug(f"Loading dataset from NetCDF file: {filePath}")
+        try:
+            cls.ds = utils.from_netcdf(filePath)
+            logger.debug("Dataset loaded successfully")
+            return cls
+        except Exception as e:
+            logger.error(f"Error while loading dataset from NetCDF: {str(e)}")
+            raise
 
     def stackPathID(
         self,
